@@ -12,18 +12,26 @@
   position: absolute;
 }
 
+@mixin coins {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+}
+
 ._coin1 {
-  width: 30%;
+  @include coins
 }
 
 ._coin2 {
-  width: 30%;
+  @include coins
 }
 
 ._coin3 {
-  width: 30%;
+  @include coins
 }
 
 ._coin4 {
-  width: 30%;
+  @include coins
 }
+
+
