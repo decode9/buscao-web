@@ -16,8 +16,8 @@ const FeaturedSlider = ({ posts }) => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    calculateWidth();
-  }, [])
+    if(posts.length) calculateWidth();
+  }, [posts])
 
   const nextOrPrevious = (param) => {
     let pagination = page;
