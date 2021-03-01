@@ -67,7 +67,7 @@ const FeaturedSlider = ({ posts }) => {
               <ArrowLeft color='#FFFFFF' />
             </div>
             <div className={styles._itemsChild}>
-              <div className={styles._slider} style={{ width: sliderWidth }}>
+              <div className='_slider'>
 
                 {
                   Array(pagesArray()).fill(1).map((res, index) => {
@@ -108,6 +108,14 @@ const FeaturedSlider = ({ posts }) => {
             <p> No existen comercios destacados </p>
           </div>)
       }
+
+      <style jsx>{`
+      ._slider {
+        display: inline-flex;
+        justify-content: center;
+        width: ${sliderWidth}
+      }
+    `}</style>
     </>
   )
 };
