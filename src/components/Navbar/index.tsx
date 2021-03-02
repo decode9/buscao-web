@@ -9,30 +9,30 @@ import { ResposiveNavbar } from '../../components';
 const Navbar = ({ background = '#1652F0', resource }: any) => {
 
   const { currentLocation, countries } = resource
-  const [show, setShow] = useState(false);
+  const [responsive, setResponsive] = useState(false);
   const dispatch = useDispatch()
 
   const changeCountry = (event) => dispatch(changeResources(event.target.value))
 
   const menuDeploy = () => {
-    setShow(!show);
+    setResponsive(!responsive);
   };
 
   useEffect(() => {
-    if(window.innerWidth < 768) setShow(true)
+    if(window.innerWidth < 768) setResponsive(true)
     window.addEventListener('resize', checkWidth);
   }, []);
 
   const checkWidth = () => {
     const mediaQuery = window.matchMedia('(max-width: 768px)')
-    if (mediaQuery.matches) return setShow(true);
-    setShow(false);
+    if (mediaQuery.matches) return setResponsive(true);
+    setResponsive(false);
   };
 
   return (
     <>
     {
-      !show ?
+      !responsive ?
       <div className='_main'>
       <div className={styles._container}>
         <div className={styles._leftSection} >
@@ -41,7 +41,7 @@ const Navbar = ({ background = '#1652F0', resource }: any) => {
               <img src='images/logos/logo.svg' />
             </Link>
           </div>
-          <div className={!show ? styles._links : styles._linksShow}>
+          <div className={styles._links}>
             <Link href="/commerces">
               <p className={styles._textLink}> Comercios </p>
             </Link>
