@@ -9,30 +9,34 @@ const Search = () => {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const [checkedOne, setCheckedOne]: any = useState(false)
-  const [checkedTwo, setCheckedTwo]: any = useState(false)
+  const { filter } = useSelector(state => state.post);
+
+  const [checkedOne, setCheckedOne]: any = useState(filter.checkedOne)
+  const [checkedTwo, setCheckedTwo]: any = useState(filter.checkedTwo)
 
   const { categories, currentStates } = useSelector(state => state.resource);
-  const { filter } = useSelector(state => state.post);
-  const [select, setSelect]: any = useState({ state: filter.state, category: filter.category, title: filter.title })
 
-  const changeState = (event) => {
-    dispatch(filterPosts(event.target.value, 'state'))
-    setSelect({ ...select, ...{ state: event.target.value, category: '', title: '' } })
-    dispatch(setFilter({ ...select, ...{ state: event.target.value, category: '', title: '' } }))
+  const [select, setSelect]: any = useState({ state: filter.state, category: filter.category, title: filter.title, checkedOne: checkedOne, checkedTwo: checkedTwo })
+
+  const changeState = (value) => {
+    dispatch(filterPosts(value, 'state'))
+    setSelect({ ...select, ...{ state: value, category: '', title: '' } })
+    dispatch(setFilter({ ...select, ...{ state: value, category: '', title: '', checkedOne: checkedOne, checkedTwo: checkedTwo } }))
   }
 
   const checkStateOne = () => {
+    changeState('')
     setCheckedOne(!checkedOne)
   }
   const checkStateTwo = () => {
+    changeCategory('')
     setCheckedTwo(!checkedTwo)
   }
 
-  const changeCategory = (event) => {
-    dispatch(filterPosts(event.target.value, 'categories'))
-    setSelect({ ...select, ...{ category: event.target.value, title: '' } })
-    dispatch(setFilter({ ...select, ...{ category: event.target.value, title: '' } }))
+  const changeCategory = (value) => {
+    dispatch(filterPosts(value, 'categories'))
+    setSelect({ ...select, ...{ category: value, title: '', checkedOne: checkedOne, checkedTwo: checkedTwo } })
+    dispatch(setFilter({ ...select, ...{ category: value, title: '', checkedOne: checkedOne, checkedTwo: checkedTwo } }))
   }
 
   const changeTitle = (event) => {
@@ -60,7 +64,7 @@ const Search = () => {
               <label style={{ color: checkedOne ? '#1652F0' : '#93959A' }} htmlFor='state'>UBICACIÓN</label>
               <div className={styles._dropdown}> <DropDown color={checkedOne ? '#1652F0' : '#93959A'} /> </div>
             </label>
-            <select name='state' value={select.state} onChange={changeState}>
+            <select disabled={!checkedOne} name='state' value={select.state} onChange={event => changeState(event.target.value)}>
               <option value=''>Todos</option>
               {currentStates.map((state, index) => (<option value={state.slug} key={index}>{state.name}</option>))}
             </select>
@@ -76,14 +80,14 @@ const Search = () => {
             <label style={{ color: checkedTwo ? '#1652F0' : '#93959A' }} htmlFor='category'>CATEGORIAS</label>
             <div className={styles._dropdown}> <DropDown color={checkedTwo ? '#1652F0' : '#93959A'} /> </div>
           </label>
-          <select name='category' value={select.category} onChange={changeCategory} >
+          <select disabled={!checkedTwo} name='category' value={select.category} onChange={event => changeCategory(event.target.value)} >
             <option value=''>Todos</option>
             {categories.map((category, index) => (<option value={category.slug} key={index}>{category.name}</option>))}
           </select>
         </div>
       </div>
       <div className={styles._inputContainer}>
-        <input placeholder='Que estás buscando' value={select.title} onChange={(event) => setSelect({ ...select, ...{ title: event.target.value } })} />
+        <input placeholder='Que estás buscando' value={select.title} onChange={(event) => setSelect({ ...select, ...{ title: event.target.value, checkedOne: checkedOne, checkedTwo: checkedTwo } })} />
         <button className={styles._goButton} onClick={changeTitle}>Ir</button>
       </div>
     </div>
