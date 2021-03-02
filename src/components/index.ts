@@ -12,3 +12,4 @@ export { default as Welcome } from './Welcome'
 export { default as Currency3D } from './Currency3D'
 export { default as Loader } from './Loader'
 export { default as ResposiveNavbar } from './ResponsiveNavbar';
+export { default as Location } from './Location';

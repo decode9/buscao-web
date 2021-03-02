@@ -62,19 +62,8 @@
   height: 100%;
 }
 
-._countriesSelect {
-  color: $aquaHaze;
-  font-family: $helveticaNowText;
+._locationParent {
   margin-right: 0.8rem;
-  background-color: transparent;
-  border: none;
-  font-size: 1rem;
-  font-size: 0.9rem;
-  cursor: pointer;
-
-  & option {
-    color: $mineShaft;
-  }
 }
 
 ._logo {

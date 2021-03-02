@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import { Toggle } from '../../../public/images/icons';
-import Link from 'next/link';
+import Link from 'next/link'
+import { Location } from '../';
+import { World } from '../../../public/images/icons';
 
 const ResponsiveNavbar = ({ background }) => {
 
@@ -43,6 +45,14 @@ const ResponsiveNavbar = ({ background }) => {
               <a href='https://cryptobuyer.io' target='_blank'>
                 <button className={styles._btnLink} > Cryptobuyer.io </button>
               </a>
+            </li>
+
+            <li className={styles._locationParent}>
+              <Location color='#353535' />
+              <div className={styles._worldParent}>
+                <World color='#353535' />
+              </div>
+
             </li>
           </ul>
         </div>

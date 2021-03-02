@@ -1,30 +1,22 @@
 import { useState, useEffect} from 'react';
-import { useDispatch } from 'react-redux'
-import { changeResources } from '../../store/actions'
 import { World, Toggle } from '../../../public/images/icons'
 import styles from './styles.module.scss'
 import Link from 'next/link'
-import { ResposiveNavbar } from '../../components';
+import { ResposiveNavbar, Location } from '../../components';
 
-const Navbar = ({ background = '#1652F0', resource }: any) => {
+const Navbar = ({ background = '#1652F0' }: any) => {
 
-  const { currentLocation, countries } = resource
   const [responsive, setResponsive] = useState(false);
-  const dispatch = useDispatch()
 
-  const changeCountry = (event) => dispatch(changeResources(event.target.value))
-
-  const menuDeploy = () => {
-    setResponsive(!responsive);
-  };
+  const menuDeploy = () => setResponsive(!responsive);
 
   useEffect(() => {
-    if(window.innerWidth < 768) setResponsive(true)
+    if(window.innerWidth < 768) setResponsive(true);
     window.addEventListener('resize', checkWidth);
   }, []);
 
   const checkWidth = () => {
-    const mediaQuery = window.matchMedia('(max-width: 768px)')
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
     if (mediaQuery.matches) return setResponsive(true);
     setResponsive(false);
   };
@@ -55,17 +47,10 @@ const Navbar = ({ background = '#1652F0', resource }: any) => {
         </div>
         <div className={styles._rightSection} >
           <div className={styles._rightText}>
-            {
-              currentLocation ? (
-                <select name="countries" className={styles._countriesSelect} defaultValue={currentLocation} onChange={changeCountry}>
-                  {
-                    countries.map((country, index) => {
-                      return <option value={country.slug} key={index}>{country.name}</option>
-                    })
-                  }
-                </select>
-              ) : null
-            }
+            <div className={styles._locationParent}>
+               <Location />
+            </div>
+
             <div>
               <World color='#EFF4F6' />
             </div>

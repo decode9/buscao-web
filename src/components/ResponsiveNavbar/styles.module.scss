@@ -2,9 +2,9 @@
 
 @mixin menu() {
   position: fixed;
-  width: 40%;
+  width: 60%;
   height: 100vh;
-  max-width: 15.625rem;
+  max-width: 31.25rem;
   background-color: $white;
   top: 0px;
   left: -100%;
@@ -40,7 +40,7 @@
   margin-top: 3rem;
 
   & li {
-    margin-top: 1.2rem;
+    margin-top: 1.4rem;
     cursor: pointer;
   }
 }
@@ -58,9 +58,20 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   border-radius: 5px;
-  border: 2px solid $aquaHaze;
+  border: none;
   font-size: 0.8rem;
-  color: white;
+  color: $white;
+}
+
+._locationParent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+._worldParent {
+  margin-left: 0.5rem;
 }
 
 @keyframes in {
