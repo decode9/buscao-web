@@ -1,6 +1,4 @@
 @mixin responsive($size) {
-
-
   @if $size == xxxl {
     @media (max-width: 1600px)   {
       @content;

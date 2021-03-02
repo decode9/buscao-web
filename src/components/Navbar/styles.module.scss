@@ -80,3 +80,18 @@
 ._logo {
   cursor: pointer;
 }
+
+._toggle {
+  display: none;
+}
+
+@include responsive(lg) {
+  ._textLink {
+    padding-left: 1.5rem;
+  }
+
+  ._btnLink {
+    margin-left: 1.5rem;
+  }
+}
+
