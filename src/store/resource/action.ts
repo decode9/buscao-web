@@ -13,7 +13,7 @@ export const getResources: any = () => async dispatch => {
   delete allResources['homePage']
 
   const country = await _getCurrentLocation()
-  allResources['currentLocation'] = country
+  allResources['currentLocation'] = (allResources.countries.some(item => item.slug == country)) ? country : 've';
 
   const states = _getStates(allResources.countries, country)
   allResources['currentStates'] = states ? states : []
