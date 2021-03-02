@@ -19,6 +19,7 @@ const Search = () => {
   const changeState = (event) => {
     dispatch(filterPosts(event.target.value, 'state'))
     setSelect({ ...select, ...{ state: event.target.value, category: '', title: '' } })
+    dispatch(setFilter({ ...select, ...{ state: event.target.value, category: '', title: '' } }))
   }
 
   const checkStateOne = () => {
@@ -31,19 +32,20 @@ const Search = () => {
   const changeCategory = (event) => {
     dispatch(filterPosts(event.target.value, 'categories'))
     setSelect({ ...select, ...{ category: event.target.value, title: '' } })
+    dispatch(setFilter({ ...select, ...{ category: event.target.value, title: '' } }))
   }
 
   const changeTitle = (event) => {
-    const title  = select.title
+    const title = select.title
     dispatch(filterPosts(title, 'title'))
     dispatch(setFilter(select))
 
-    if(title) redirectToResults()
+    if (title) redirectToResults()
   }
 
   const redirectToResults = () => {
     const pathname = router.pathname
-    if(pathname == '/' || pathname == '/commerce') router.push('/commerces')
+    if (pathname == '/' || pathname == '/commerce') router.push('/commerces')
   }
 
   return (
