@@ -5,3 +5,4 @@ export { default as ArrowRight } from './arrow-right';
 export { default as Location } from './location';
 export { default as Checkbox } from './checkbox';
 export { default as DropDown } from './dropdown';
+export { default as Toggle } from './toggle';

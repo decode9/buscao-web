@@ -13,10 +13,19 @@ const _filterSelection = (posts, filter, select) => {
 
   switch (select) {
     case 'state':
+
+      const filterPost = []
+
+      for(let oldPost of result){
+        let post = JSON.parse(JSON.stringify(oldPost));
+        post.commerce.subsidiary = Filter(post.commerce.subsidiary, filter, 'subsidiary');
+        filterPost.push(post)
+      }
+
       return {
-        statePosts: result,
-        categoryPosts: result,
-        filterPosts: result
+        statePosts: filterPost,
+        categoryPosts: filterPost,
+        filterPosts: filterPost
       }
     case 'categories':
       return {
@@ -45,7 +54,7 @@ export const filterPosts = (filter: string, type) => (dispatch, getState) => {
   dispatch(actionObject(UPDATE_POSTS, result))
 }
 
-export const setFilter = (filter) => (dispatch) =>  {
+export const setFilter = (filter) => (dispatch) => {
   dispatch(actionObject(SHOW_LOADER, true))
   dispatch(actionObject(SET_FILTER, filter))
   dispatch(actionObject(SHOW_LOADER, false))

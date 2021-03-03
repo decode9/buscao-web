@@ -1,0 +1,16 @@
+@import '../../../public/styles/index.scss';
+
+._countriesSelect {
+    color: $aquaHaze;
+    font-family: $helveticaNowText;
+    margin-right: 0.8rem;
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+
+    & option {
+      color: $mineShaft;
+    }
+  }

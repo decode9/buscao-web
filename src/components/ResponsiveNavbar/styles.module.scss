@@ -1,0 +1,93 @@
+@import '../../../public/styles/index.scss';
+
+@mixin menu() {
+  position: fixed;
+  width: 60%;
+  height: 100vh;
+  max-width: 31.25rem;
+  background-color: $white;
+  top: 0px;
+  left: -100%;
+  z-index: 999;
+}
+
+._child {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+._menu {
+  @include menu;
+  animation: in ease-in 1s forwards;
+}
+
+._menuHidden {
+  @include menu;
+  animation: out ease-out 1s forwards;
+}
+
+._static {
+  display: none;
+}
+
+._list {
+  list-style: none;
+  font-family: $helveticaNowText;
+  color: $mineShaft;
+  font-size: 0.9rem;
+  margin-top: 3rem;
+
+  & li {
+    margin-top: 1.4rem;
+    cursor: pointer;
+  }
+}
+
+._toggleParent {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+}
+
+._btnLink {
+  font-family: $helveticaNowTextBold;
+  background-color:$blueRibbon;
+  color: $mineShaft;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  font-size: 0.8rem;
+  color: $white;
+}
+
+._locationParent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+._worldParent {
+  margin-left: 0.5rem;
+}
+
+@keyframes in {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0%;
+  }
+}
+
+@keyframes out {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -100%;
+  }
+}

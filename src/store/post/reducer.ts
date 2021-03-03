@@ -10,7 +10,9 @@ const initialState = {
   filter: {
     state: '',
     category: '',
-    title: ''
+    title: '',
+    checkedOne: true,
+    checkedTwo: true,
   }
 }
 
