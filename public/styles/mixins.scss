@@ -4,7 +4,6 @@
       @content;
     }
   }
-
 	@if $size == xxl {
     @media (max-width: 1400px)   {
       @content;
