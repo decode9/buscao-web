@@ -84,7 +84,6 @@ const Card: FC<CardProps> = ({ content, phoneClass, longAddr, showClock = true, 
     <div>
       <div className={styles._card} onClick={redirect}>
         <div className={styles._imageParent}>
-
           <img src={(content) ? content?.commerce?.image : 'images/logos/buscao-big-logo.svg'} width='40%' height='100%'></img>
         </div>
 
@@ -115,10 +114,9 @@ const Card: FC<CardProps> = ({ content, phoneClass, longAddr, showClock = true, 
           ) : ''
         }
 
-        <div className={styles._call}>
-          <p> {(content?.commerce?.subsidiary[0]?.phoneNumber) ? content?.commerce?.subsidiary[0]?.phoneNumber : 'Llamar'}</p>
-        </div>
-
+        <a className={styles._call} href={(content?.commerce?.subsidiary[0]?.phoneNumber) ? `tel:${(content?.commerce?.subsidiary[0]?.phoneNumber).replace(/\s/g, '')}` : ''} target='_blank'>
+          <div id={(content?.commerce?.subsidiary[0]?.phoneNumber) ? (content?.commerce?.subsidiary[0]?.phoneNumber) : ''} ></div>
+        </a>
         {
           showAddress ? (
             <div className={styles._location}>
