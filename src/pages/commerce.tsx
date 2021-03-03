@@ -24,27 +24,29 @@ const day = findDay()
 const commerce: NextPage = () => {
 
   const dispatch = useDispatch()
-  const { post, selectedCommerce, resource } = useSelector(state => state)
+  const { post: { filterPosts }, selectedCommerce, resource } = useSelector(state => state)
 
-  const [company] = useState<any>(() => post.filterPosts.find(element => element['id'] == selectedCommerce.id));
+  const [company, setCompany] = useState<any>(() => filterPosts.find(element => element['id'] == selectedCommerce.id));
   const [subsidiary, setSubsidiary] = useState<any>();
   const [focus, setFocus] = useState(1);
   const [page, setPage] = useState(1)
 
   useEffect(() => {
-    var first_subsidiary = company ? company.commerce.subsidiary : [];
+    const newCompany = filterPosts.find(element => element['id'] == selectedCommerce.id)
+    setCompany(newCompany)
+    var first_subsidiary = newCompany ? newCompany.commerce.subsidiary : [];
     setSubsidiary(first_subsidiary[0]);
     changeCompany(first_subsidiary[0], 0)
     dispatch(setLoader(false));
-  }, []);
+  }, [filterPosts]);
 
   const changeCompany = (node, element) => {
     setSubsidiary(node);
     setFocus(element);
     var x = document.getElementById(element)
     var y = document.getElementById(focus.toString())
-    x?.setAttribute("style", "color: white; background-color: #1652F0;")
-    if(element != focus) y?.removeAttribute("style")
+    x?.setAttribute('style', 'color: white; background-color: #1652F0;')
+    if (element != focus) y?.removeAttribute('style')
   }
 
   return (
@@ -56,19 +58,20 @@ const commerce: NextPage = () => {
             <div className={styles._cardContainer}>
               <Card
                 content={company}
-                phoneClass="_infoParentBlack"
-                longAddr={subsidiary ? subsidiary.address : '-' }
+                phoneClass='_infoParentBlack'
+                longAddr={subsidiary ? subsidiary.address : ''}
                 showClock={false}
                 showAddress={false}
               />
             </div>
-            <section style={{ display: 'flex', flexWrap: "wrap", justifyContent: "space-around" }}>
-                <Currency key={company ? company.id : []} currenciesData={company ? { currencies: company.commerce.paymentmethods } : []} />
+            <section style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+              <Currency key={company ? company.id : []} currenciesData={company ? { currencies: company.commerce.paymentmethods } : []} />
             </section>
           </div>
-          <div>
+          <div className={(company) ? '' : styles._hideMap}>
+            {(company) ? '' : <div className={styles._hide}><p>No Disponible</p></div>}
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d12329023.712065306!2d-91.10433262499994!3d41.0249156380248!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sve!4v1613662529659!5m2!1ses!2sve">
+              src='https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d12329023.712065306!2d-91.10433262499994!3d41.0249156380248!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sve!4v1613662529659!5m2!1ses!2sve'>
             </iframe>
           </div>
         </section>
@@ -79,28 +82,38 @@ const commerce: NextPage = () => {
 
         {
           company ?
-          <section className={styles._cardsContainer}>
-            <div className={styles._cards}>
-              { paginate(company.commerce.subsidiary, page, perPage).map((card, index) => {
-                return (
-                  <button className={styles._cardContent} id={index.toString()} key={index} onClick={() => changeCompany(card, index)}>
-                  <p className={styles._text}> {card.name}</p>
-                  <p>{card.phoneNumber}</p>
-                  {
-                    card.schedule[day] ?
-                    <p>{card.schedule[day].apertura} / {card.schedule[day].cierre}</p> :
-                    <p> - </p>
-                  }
-                </button>
-                ) })
-              }
+            <section className={styles._cardsContainer}>
+              <div className={styles._cards}>
+                {paginate(company.commerce.subsidiary, page, perPage).map((card, index) => {
+                  return (
+                    <button className={styles._cardContent} id={index.toString()} key={index} onClick={() => changeCompany(card, index)}>
+                      <p className={styles._text}> {card.name}</p>
+                      <p>{card.phoneNumber}</p>
+                      {
+                        card.schedule[day] ?
+                          <p>{card.schedule[day].apertura} / {card.schedule[day].cierre}</p> :
+                          <p> - </p>
+                      }
+                    </button>
+                  )
+                })
+                }
               </div>
-            <div className={styles._paginationContainer}>
-              {
-                company ? <Pagination color='white' activeColor='#1652F0' currentPage={page} items={company?.commerce.subsidiary} perPage={perPage} changePage={setPage}/> : ''
-              }
-            </div>
-          </section> : ''
+              <div className={styles._paginationContainer}>
+                {
+                  company ? <Pagination color='white' activeColor='#1652F0' currentPage={page} items={company?.commerce.subsidiary} perPage={perPage} changePage={setPage} /> : ''
+                }
+              </div>
+            </section> : (
+              <section className={styles._cardsContainer}>
+                <div className={styles._notFoundContainer}>
+                  <div>
+                    <p>¡Lo siento! No hay servicios que coincida con tu búsqueda.</p>
+                    <p>Intente cambiar sus filtros de búsqueda</p>
+                  </div>
+                </div>
+              </section>
+            )
         }
       </main>
     </div>

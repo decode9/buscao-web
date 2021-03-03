@@ -22,6 +22,7 @@ const Search = () => {
     dispatch(filterPosts(value, 'state'))
     setSelect({ ...select, ...{ state: value, category: '', title: '' } })
     dispatch(setFilter({ ...select, ...{ state: value, category: '', title: '', checkedOne: checkedOne, checkedTwo: checkedTwo } }))
+    if (value && router.route == '/') redirectToResults()
   }
 
   const checkStateOne = () => {
@@ -37,6 +38,7 @@ const Search = () => {
     dispatch(filterPosts(value, 'categories'))
     setSelect({ ...select, ...{ category: value, title: '', checkedOne: checkedOne, checkedTwo: checkedTwo } })
     dispatch(setFilter({ ...select, ...{ category: value, title: '', checkedOne: checkedOne, checkedTwo: checkedTwo } }))
+    if (value) redirectToResults()
   }
 
   const changeTitle = (event) => {
