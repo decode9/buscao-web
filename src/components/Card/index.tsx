@@ -4,7 +4,7 @@ import { CardProps } from './type'
 import styles from './styles.module.scss'
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import { setSelectedCommerce, setLoader} from '../../store/actions';
+import { setSelectedCommerce, setLoader } from '../../store/actions';
 
 const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
@@ -26,7 +26,7 @@ const processMinutes = (time) => {
   }
 }
 
-const Card: FC<CardProps> =  ({ content, phoneClass, longAddr, showClock = true, showAddress = true, id }) => {
+const Card: FC<CardProps> = ({ content, phoneClass, longAddr, showClock = true, showAddress = true, id }) => {
   const [status, setStatus] = useState(false)
   const dispatch = useDispatch()
   const router = useRouter()
@@ -77,26 +77,27 @@ const Card: FC<CardProps> =  ({ content, phoneClass, longAddr, showClock = true,
       return true;
     }
 
-    if(showClock) setStatus(checkSchedule())
+    if (showClock) setStatus(checkSchedule())
   }, [])
 
   return (
     <div>
       <div className={styles._card} onClick={redirect}>
         <div className={styles._imageParent}>
-          <img src={content?.commerce?.image} width='40%' height="100%"></img>
+
+          <img src={(content) ? content?.commerce?.image : 'images/logos/buscao-big-logo.svg'} width='40%' height="100%"></img>
         </div>
 
         <div className={styles._minicard}>
           <div>
-            <span className={styles._title}> { content?.title || 'Excelcior Gama' } </span><br />
-            <span className={styles._text}> { content?.commerce?.description || 'Supermercados, Alimentos, Charcuteria' } </span>
+            <span className={styles._title}> {content?.title || 'No Disponible'} </span><br />
+            <span className={styles._text}> {content?.commerce?.description || 'Categoria'} </span>
           </div>
 
           {
             showClock ? (
               <div className={styles._rightText}>
-                <p className={status ? styles._statusText : styles._closedText}> { status ? 'ABIERTO' : 'CERRADO '} </p>
+                <p className={status ? styles._statusText : styles._closedText}> {status ? 'ABIERTO' : 'CERRADO '} </p>
                 <Clock color={status ? '#4A973C' : '#EC3333'} />
               </div>
             ) : ''
@@ -107,21 +108,21 @@ const Card: FC<CardProps> =  ({ content, phoneClass, longAddr, showClock = true,
       <div className={styles[phoneClass]}>
 
         {
-         longAddr ? (
-          <div className={styles._longAddress}>
-            <p> { longAddr } </p>
-          </div>
-         ) : ''
+          longAddr ? (
+            <div className={styles._longAddress}>
+              <p> {longAddr} </p>
+            </div>
+          ) : ''
         }
 
         <div className={styles._call}>
-          <p> { content?.commerce?.subsidiary[0]?.phoneNumber } </p>
+          <p> {(content?.commerce?.subsidiary[0]?.phoneNumber) ? content?.commerce?.subsidiary[0]?.phoneNumber : 'Llamar'}</p>
         </div>
 
         {
           showAddress ? (
             <div className={styles._location}>
-              <p> { content?.commerce.subsidiary ? content?.commerce?.subsidiary[0]?.address : '' } </p>
+              <p> {content?.commerce.subsidiary ? content?.commerce?.subsidiary[0]?.address : ''} </p>
               <Location color='#828282' />
             </div>
           ) : ''

@@ -1,4 +1,4 @@
-@import '../styles/';
+@import "../styles/";
 
 ._cardsContainer {
   background-color: $mineShaft;
@@ -73,6 +73,47 @@
   align-items: center;
 }
 
+._notFoundContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5%;
+
+  & * {
+    font-family: $helveticaNowText;
+  }
+
+  & p {
+    font-size: 20px;
+    text-align: center;
+    color: $white;
+  }
+}
+
+._hideMap {
+  position: relative;
+
+  ._hide {
+    width: 100%;
+    height: 100%;
+    background: #34363dcc;
+    position: absolute;
+    border-radius: 15px;
+    p {
+      font-family: $helveticaNowText;
+      font-size: 20px;
+      position: absolute;
+      top: 0px;
+      bottom: 0px;
+      right: 0px;
+      left: 0px;
+      margin: auto;
+      text-align: center;
+      height: fit-content;
+      color: white;
+    }
+  }
+}
 @media only screen and (min-width: 1400px) {
   ._leftInfo {
     height: 60vh;
