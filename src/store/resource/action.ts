@@ -1,7 +1,7 @@
 import { CHANGE_RESOURCES, GET_RESOURCES, } from './action-types'
 import { actionObject, Filter } from '../../utils'
 import { GET_HOME_PAGE } from '../page/action-types'
-import { resources } from '../../graphql/querys'
+import { resources } from '../../graphql/query'
 import axios from 'axios'
 import { UPDATE_POSTS } from '../post/action_types'
 import { SHOW_LOADER } from '../loader/action-types'
@@ -13,12 +13,12 @@ export const getResources: any = () => async dispatch => {
   delete allResources['homePage']
 
   const country = await _getCurrentLocation()
-  allResources['currentLocation'] = country
+  allResources['currentLocation'] = (allResources.countries.some(item => item.slug == country)) ? country : 've';
 
-  const states = _getStates(allResources.countries, country)
+  const states = _getStates(allResources.countries, allResources['currentLocation'])
   allResources['currentStates'] = states ? states : []
 
-  const countryPosts = Filter(allResources['posts'], country, 'country');
+  const countryPosts = Filter(allResources['posts'], allResources['currentLocation'], 'country');
   const outstanding = Filter(countryPosts, true, 'outstanding');
 
   dispatch(actionObject(GET_RESOURCES, allResources))
