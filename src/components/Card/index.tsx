@@ -85,7 +85,7 @@ const Card: FC<CardProps> = ({ content, phoneClass, longAddr, showClock = true, 
       <div className={styles._card} onClick={redirect}>
         <div className={styles._imageParent}>
 
-          <img src={(content) ? content?.commerce?.image : 'images/logos/buscao-big-logo.svg'} width='40%' height="100%"></img>
+          <img src={(content) ? content?.commerce?.image : 'images/logos/buscao-big-logo.svg'} width='40%' height='100%'></img>
         </div>
 
         <div className={styles._minicard}>
