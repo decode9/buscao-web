@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react';
 import { World, Toggle } from '../../../public/images/icons'
 import styles from './styles.module.scss'
-import Link from 'next/link'
+import Link from 'next/link';
 import { ResposiveNavbar, Location } from '../../components';
 
 const Navbar = ({ background = '#1652F0' }: any) => {
@@ -13,6 +13,8 @@ const Navbar = ({ background = '#1652F0' }: any) => {
   useEffect(() => {
     if(window.innerWidth < 768) setResponsive(true);
     window.addEventListener('resize', checkWidth);
+
+    return () => window.removeEventListener('resize', () => {});
   }, []);
 
   const checkWidth = () => {
