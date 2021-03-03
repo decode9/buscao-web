@@ -2,6 +2,21 @@ import { createStore, applyMiddleware } from 'redux'
 import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import thunkMiddleware from 'redux-thunk'
 import reducers from './reducers'
+import createWebStorage from "redux-persist/lib/storage/createWebStorage";
+
+const createNoopStorage = () => {
+  return {
+    getItem(_key) {
+      return Promise.resolve(null);
+    },
+    setItem(_key, value) {
+      return Promise.resolve(value);
+    },
+    removeItem(_key) {
+      return Promise.resolve();
+    },
+  };
+};
 
 const bindMiddleware = (middleware) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -23,10 +38,10 @@ const reducer = (state, action) => {
 
 const makeStore: any = ({ isServer }) => {
   const createStoreHook = currentReducer => createStore(currentReducer, bindMiddleware([thunkMiddleware]))
-  if(isServer) return createStoreHook(reducer)
+  if (isServer) return createStoreHook(reducer)
 
   const { persistStore, persistReducer } = require('redux-persist')
-  const storage = require('redux-persist/lib/storage').default
+  const storage = typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
 
   const persistConfig = {
     key: 'buscaoRoot',
