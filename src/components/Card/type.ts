@@ -1,5 +1,5 @@
 export type CardProps = {
-  longAddr?: string,
+  subsidiary?: any,
   phoneClass: string
   content: any
   showClock?: boolean

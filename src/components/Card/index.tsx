@@ -26,7 +26,7 @@ const processMinutes = (time) => {
   }
 }
 
-const Card: FC<CardProps> = ({ content, phoneClass, longAddr, showClock = true, showAddress = true, id }) => {
+const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true, showAddress = true, id }) => {
   const [status, setStatus] = useState(false)
   const dispatch = useDispatch()
   const router = useRouter()
@@ -107,16 +107,23 @@ const Card: FC<CardProps> = ({ content, phoneClass, longAddr, showClock = true, 
       <div className={styles[phoneClass]}>
 
         {
-          longAddr ? (
+          subsidiary ? (
             <div className={styles._longAddress}>
-              <p> {longAddr} </p>
+              <p> {subsidiary.address} </p>
             </div>
           ) : ''
         }
 
-        <a className={styles._call} href={(content?.commerce?.subsidiary[0]?.phoneNumber) ? `tel:${(content?.commerce?.subsidiary[0]?.phoneNumber).replace(/\s/g, '')}` : ''} target='_blank'>
-          <div id={(content?.commerce?.subsidiary[0]?.phoneNumber) ? (content?.commerce?.subsidiary[0]?.phoneNumber) : ''} ></div>
-        </a>
+        {
+          content ?
+          <a className={styles._call} href={(subsidiary) ? subsidiary.phoneNumber : `tel:${(content?.commerce?.subsidiary[0]?.phoneNumber).replace(/\s/g, '')}`} target='_blank'>
+            <div id={(subsidiary) ? subsidiary.phoneNumber : content?.commerce?.subsidiary[0]?.phoneNumber} ></div>
+          </a> :
+          <a className={styles._call} href="#">
+            <div id="-"></div>
+          </a>
+        }
+
         {
           showAddress ? (
             <div className={styles._location}>
