@@ -116,7 +116,7 @@ const Card: FC<CardProps> = ({ content, phoneClass, longAddr, showClock = true, 
         }
 
         <div className={styles._call}>
-          <p> {(content?.commerce?.subsidiary[0]?.phoneNumber) ? content?.commerce?.subsidiary[0]?.phoneNumber : 'Llamar'}</p>
+          <p className={styles._phoneNumber}> {(content?.commerce?.subsidiary[0]?.phoneNumber) ? content?.commerce?.subsidiary[0]?.phoneNumber : 'Llamar'}</p>
         </div>
 
         {
