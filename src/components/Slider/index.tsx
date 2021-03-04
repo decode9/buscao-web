@@ -11,7 +11,18 @@ const Slider = ({ page }) => {
     sliding(currentImage);
     if (currentImage == 2) setUp(false);
     if (currentImage == 1 && !up) setUp(true);
-  }, [currentImage])
+  }, [currentImage]);
+
+  useEffect(() => {
+    const container = parent.current;
+    container.addEventListener('wheel', handlerTrackpad, { passive:false });
+    return () => container.removeEventListener('wheel', () => {});
+  }, []);
+
+  const handlerTrackpad = (event: any) => {
+    const isTouchPad = event.wheelDeltaY ? event.wheelDeltaY === -3 * event.deltaY : event.deltaMode === 0;
+    if(isTouchPad) event.preventDefault();
+  }
 
   const sliding = (value) => {
     const getElement = document.getElementById(page?.slideshow[currentImage].image.id);
@@ -48,13 +59,7 @@ const Slider = ({ page }) => {
               page?.slideshow.slice(0, 3).map((item, index) => {
                 return (
                   <div className={styles._container} key={index} id={item?.image?.id}>
-                    <div style={{ backgroundImage: `url(${item.image.sourceUrl})` }} className={styles._divImage} >
-                      <div className={styles._textParent} >
-                        <div className={styles._textChild}>
-                          <div dangerouslySetInnerHTML={{ __html: item?.text }} className={styles._wpContent} />
-                        </div>
-                      </div>
-                    </div>
+                    <div style={{ backgroundImage: `url(${item.image.sourceUrl})` }} className={styles._divImage} />
                   </div>
                 )
               })
