@@ -26,7 +26,7 @@ const processMinutes = (time) => {
   }
 }
 
-const Card: FC<CardProps> = ({ content, phoneClass, longAddr, showClock = true, showAddress = true, id }) => {
+const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true, showAddress = true, id }) => {
   const [status, setStatus] = useState(false)
   const dispatch = useDispatch()
   const router = useRouter()
@@ -84,7 +84,6 @@ const Card: FC<CardProps> = ({ content, phoneClass, longAddr, showClock = true, 
     <div>
       <div className={styles._card} onClick={redirect}>
         <div className={styles._imageParent}>
-
           <img src={(content) ? content?.commerce?.image : 'images/logos/buscao-big-logo.svg'} width='40%' height='100%'></img>
         </div>
 
@@ -108,16 +107,22 @@ const Card: FC<CardProps> = ({ content, phoneClass, longAddr, showClock = true, 
       <div className={styles[phoneClass]}>
 
         {
-          longAddr ? (
+          subsidiary ? (
             <div className={styles._longAddress}>
-              <p> {longAddr} </p>
+              <p> {subsidiary.address} </p>
             </div>
           ) : ''
         }
 
-        <div className={styles._call}>
-          <p className={styles._phoneNumber}> {(content?.commerce?.subsidiary[0]?.phoneNumber) ? content?.commerce?.subsidiary[0]?.phoneNumber : 'Llamar'}</p>
-        </div>
+        {
+          content ?
+          <a className={styles._call} href={(subsidiary) ? subsidiary.phoneNumber : `tel:${(content?.commerce?.subsidiary[0]?.phoneNumber).replace(/\s/g, '')}`} target='_blank'>
+            <div id={(subsidiary) ? subsidiary.phoneNumber : content?.commerce?.subsidiary[0]?.phoneNumber} ></div>
+          </a> :
+          <a className={styles._call} href="#">
+            <div id="-"></div>
+          </a>
+        }
 
         {
           showAddress ? (

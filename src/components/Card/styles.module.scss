@@ -70,6 +70,10 @@
   margin-top: 1rem;
   align-items: center;
   justify-content: flex-start;
+
+  ._call {
+    text-decoration: none;
+  }
 }
 
 ._infoParentBlack {
@@ -81,8 +85,22 @@
 
   ._call {
     background-color: $mineShaft;
-    width: 35%;
+    width: 40%;
     text-align: center;
+    text-decoration: none;
+  }
+
+  a div::before {
+    content: 'LLAMAR';
+  }
+
+  a:hover {
+    a div::before {
+      content: '';
+    }
+    a div::after {
+      content: attr(id);
+    }
   }
 }
 
@@ -96,6 +114,21 @@
   border-radius: 5px;
   font-size: 0.9rem;
   color: $white;
+  width: 40%;
+  text-align: center;
+
+  & div::before {
+    content: 'LLAMAR';
+  }
+
+  &:hover {
+    & div::before {
+      content: '';
+    }
+    & div::after {
+      content: attr(id);
+    }
+  }
 }
 
 ._phoneNumber {
@@ -109,7 +142,7 @@
   color: $blueRibbon;
   font-family: 'Helvetica-Now-Text';
   font-size: 14px;
-  width: 60%;
+  width: 55%;
 }
 
 ._location {

@@ -59,7 +59,7 @@ const commerce: NextPage = () => {
               <Card
                 content={company}
                 phoneClass='_infoParentBlack'
-                longAddr={subsidiary ? subsidiary.address : ''}
+                subsidiary={subsidiary ? subsidiary : ''}
                 showClock={false}
                 showAddress={false}
               />
