@@ -90,11 +90,19 @@
   background-color: $blueRibbon;
   font-family: $helveticaNowText;
   font-weight: 600;
-  padding: 0.8rem 1.3rem;
+  padding: 0.8rem 1rem;
+  width: 11rem;
   box-sizing: border-box;
   border-radius: 5px;
   font-size: 0.9rem;
   color: $white;
+}
+
+._phoneNumber {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 ._longAddress {
