@@ -32,10 +32,13 @@ const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true
   const router = useRouter()
 
   const redirect = () => {
-    const id = content.id;
-    dispatch(setLoader(true));
-    dispatch(setSelectedCommerce(id));
-    router.push('/commerce');
+    let path = window.location.pathname == '/commerce' ? false : true
+    if(path) {
+      const id = content.id;
+      dispatch(setLoader(true));
+      dispatch(setSelectedCommerce(id));
+      router.push('/commerce');
+    }
   }
 
   useEffect(() => {
