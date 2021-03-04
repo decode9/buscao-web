@@ -119,7 +119,7 @@ const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true
 
         {
           content ?
-          <a className={styles._call} href={(subsidiary) ? subsidiary.phoneNumber : `tel:${(content?.commerce?.subsidiary[0]?.phoneNumber).replace(/\s/g, '')}`} target='_blank'>
+          <a className={styles._call} href={(subsidiary) ? `tel:${(subsidiary.phoneNumber).replace(/\s/g, '')}` : `tel:${(content?.commerce?.subsidiary[0]?.phoneNumber).replace(/\s/g, '')}`} target='_blank'>
             <div id={(subsidiary) ? subsidiary.phoneNumber : content?.commerce?.subsidiary[0]?.phoneNumber} ></div>
           </a> :
           <a className={styles._call} href="#">
