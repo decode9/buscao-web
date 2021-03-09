@@ -60,11 +60,11 @@ const commerce: NextPage = () => {
                 content={company}
                 phoneClass='_infoParentBlack'
                 subsidiary={subsidiary ? subsidiary : ''}
-                showClock={false}
+                showClock={true}
                 showAddress={false}
               />
             </div>
-            <section style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+            <section>
               <Currency key={company ? company.id : []} currenciesData={company ? { currencies: company.commerce.paymentmethods } : []} />
             </section>
           </div>
@@ -85,14 +85,15 @@ const commerce: NextPage = () => {
             <section className={styles._cardsContainer}>
               <div className={styles._cards}>
                 {paginate(company.commerce.subsidiary, page, perPage).map((card, index) => {
+                  console.log(card)
                   return (
                     <button className={styles._cardContent} id={index.toString()} key={index} onClick={() => changeCompany(card, index)}>
                       <p className={styles._text}> {card.name}</p>
                       <p>{card.phoneNumber}</p>
                       {
                         card.schedule[day] ?
-                          <p>{card.schedule[day].apertura} / {card.schedule[day].cierre}</p> :
-                          <p> - </p>
+                          card.schedule[day].apertura ? <p>{card.schedule[day].apertura} / {card.schedule[day].cierre}</p> : <p>No Disponible</p>
+                          : <p> - </p>
                       }
                     </button>
                   )
