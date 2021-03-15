@@ -85,7 +85,6 @@ const commerce: NextPage = () => {
             <section className={styles._cardsContainer}>
               <div className={styles._cards}>
                 {paginate(company.commerce.subsidiary, page, perPage).map((card, index) => {
-                  console.log(card)
                   return (
                     <button className={styles._cardContent} id={index.toString()} key={index} onClick={() => changeCompany(card, index)}>
                       <p className={styles._text}> {card.name}</p>
