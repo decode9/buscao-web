@@ -187,3 +187,24 @@
     margin-bottom: 14px;
   }
 }
+
+@include responsive(lg){
+  ._searchBuild {
+    position: relative;
+    margin: 0 auto;
+    top: 50px;
+    & > div {
+      position: relative;
+      left: 0;
+      top: unset;
+  
+      & > div {
+        position: relative;
+        right: 0;
+      }
+    }
+  }
+  ._blackfloor{
+    height: 220px;
+  }
+}
