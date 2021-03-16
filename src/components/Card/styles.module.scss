@@ -1,6 +1,16 @@
 @import '../../../public/styles/index.scss';
 
+._cardPrincipalContainer {
+  @include responsive(sm) {
+    display: flex;
+    flex-wrap: wrap-reverse;
+  }
+}
+
 ._card {
+  @include responsive(sm) {
+    width: 100%;
+  }
   border: solid 2px $blueRibbon;
   border-radius: 35px;
   display: flex;
@@ -83,7 +93,19 @@
   justify-content: space-between;
   height: 70px;
 
+  @include responsive(sm) {
+    flex-wrap: wrap;
+    width: 100%;
+    height: inherit;
+    margin: 0 1rem 1.5rem;
+  }
+
   ._call {
+    @include responsive(sm) {
+      width: 60%;
+      margin: auto;
+    }
+
     background-color: $mineShaft;
     width: 40%;
     text-align: center;
@@ -143,6 +165,14 @@
   font-family: 'Helvetica-Now-Text';
   font-size: 14px;
   width: 55%;
+
+  @include responsive(sm) {
+    width: 100%;
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+  }
 }
 
 ._location {

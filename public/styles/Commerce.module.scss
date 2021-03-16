@@ -1,4 +1,4 @@
-@import '../styles/';
+@import '../styles/index.scss';
 
 ._cardsContainer {
   background-color: $mineShaft;
@@ -21,6 +21,17 @@
   border: none;
   text-align: left;
   height: 7rem;
+
+  @include responsive(md) {
+    width: 45%;
+    margin: 0 2% 5%;
+  }
+
+  @include responsive(sm) {
+    width: 100%;
+    margin: 0 2% 8%;
+    padding: 5%;
+  }
 
   ._text {
     text-transform: capitalize;
@@ -46,6 +57,12 @@
   display: flex;
   justify-content: space-between;
 
+  @include responsive(md) {
+    flex-wrap: wrap-reverse;
+    padding: 0%;
+    margin: 0%;
+  }
+
   iframe {
     border: initial;
     border-radius: 15px;
@@ -55,6 +72,11 @@
 }
 
 ._leftInfo {
+  @include responsive(md) {
+    height: inherit;
+    width: 100%;
+  }
+
   width: 35vw;
   height: 68vh;
   display: flex;
@@ -63,6 +85,11 @@
 }
 
 ._cardContainer {
+
+  @include responsive(md) {
+    margin: 0 10% 1.5rem;
+  }
+
   margin-bottom: 1rem;
 }
 
@@ -90,6 +117,17 @@
   }
 }
 
+._mapContainer {
+  @include responsive(md) {
+    margin: 5% auto;
+
+    iframe {
+      width: 75vw;
+      height: 35vh;
+    }
+  }  
+}
+
 ._hideMap {
   position: relative;
 
@@ -114,6 +152,7 @@
     }
   }
 }
+
 @media only screen and (min-width: 1400px) {
   ._leftInfo {
     height: 60vh;
