@@ -1,3 +1,5 @@
+@import '../../../public/styles/';
+
 ._container {
   display: flex;
   flex-direction: column;
@@ -13,6 +15,11 @@
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 2rem;
   grid-auto-rows: minmax(100px, auto);
+
+  @include responsive(md) {
+    grid-template-columns: auto;
+    padding: inherit;
+  }
 }
 
 ._paginationContainer {
@@ -30,26 +37,51 @@
 ._cardElement1 {
   grid-column: 2;
   grid-row: 1;
+  
+  @include responsive(md) {
+    grid-column: 1;
+    grid-row: 2;
+  }
 }
 
 ._cardElement2 {
   grid-column: 1;
   grid-row: 2;
+
+  @include responsive(md) {
+    grid-column: 1;
+    grid-row: 3;
+  }
 }
 
 ._cardElement3 {
   grid-column: 2;
   grid-row: 2;
+
+  @include responsive(md) {
+    grid-column: 1;
+    grid-row: 4;
+  }
 }
 
 ._cardElement4 {
   grid-column: 1;
   grid-row: 3;
+
+  @include responsive(md) {
+    grid-column: 1;
+    grid-row: 5;
+  }
 }
 
 ._cardElement5 {
   grid-column: 2;
   grid-row: 3;
+  
+  @include responsive(md) {
+    grid-column: 1;
+    grid-row: 6;
+  }
 }
 
 ._clickMe {
