@@ -71,7 +71,7 @@ const commerce: NextPage = () => {
           <div className={(company) ? '' : styles._hideMap}>
             {(company) ? '' : <div className={styles._hide}><p>No Disponible</p></div>}
             <iframe
-              src='https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d12329023.712065306!2d-91.10433262499994!3d41.0249156380248!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sve!4v1613662529659!5m2!1ses!2sve'>
+              src={ (subsidiary) ? `https://maps.google.com/maps?q=${subsidiary.map?.latitude},${subsidiary.map?.longitude}&z=15&output=embed` : ''}>
             </iframe>
           </div>
         </section>
@@ -85,7 +85,6 @@ const commerce: NextPage = () => {
             <section className={styles._cardsContainer}>
               <div className={styles._cards}>
                 {paginate(company.commerce.subsidiary, page, perPage).map((card, index) => {
-                  console.log(card)
                   return (
                     <button className={styles._cardContent} id={index.toString()} key={index} onClick={() => changeCompany(card, index)}>
                       <p className={styles._text}> {card.name}</p>
