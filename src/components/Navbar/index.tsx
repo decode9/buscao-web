@@ -36,7 +36,7 @@ const Navbar = ({ background = '#1652F0' }: any) => {
             </Link>
           </div>
           <div className={styles._links}>
-            <Link href="/commerces">
+            <Link href='/commerces'>
               <p className={styles._textLink}> Comercios </p>
             </Link>
             <p className={styles._textLink}> Nosotros </p>

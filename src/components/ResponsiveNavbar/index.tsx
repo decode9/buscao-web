@@ -25,16 +25,96 @@ const ResponsiveNavbar = ({ background }) => {
       <div className='_mainResponsive'>
         <div className={styles._child}>
           <div>
-            <img src='images/logos/logo.svg' />
+            <Link href='/'>
+              <img src='images/logos/logo-responsive.svg' />
+            </Link>
           </div>
 
-          <div onClick={showMenu} className={styles._toggleParent}>
-            <Toggle />
+          <div className={styles._rightSide}>
+
+            <div className={styles._locationParent}>
+              <Location />
+              <div className={styles._worldParent}>
+               <World color='#EFF4F6' />
+              </div>
+            </div>
+
+            <div onClick={showMenu} className={styles._toggleParent}>
+              <Toggle />
+            </div>
           </div>
+
         </div>
 
         <div className={currentClass} >
-          <ul className={styles._list}>
+
+          <div className={styles._contentParent}>
+            <div className={styles._menuLinks}>
+
+              <div className={styles._toggleMobile} onClick={showMenu}>
+                <Toggle />
+              </div>
+              <div className={styles._links}>
+                <Link href='/commerces'>
+                  <p>Comercios</p>
+                </Link>
+
+                <hr className={styles._separator} />
+                <p>Nosotros</p>
+                <hr className={styles._separator} />
+              </div>
+
+              <div className={styles._contact}>
+                <p>CONTÁCTANOS</p>
+                <p>info@buscao.com</p>
+                <hr className={styles._separator} />
+                <p>INSTAGRAM</p>
+                <p>@buscao_</p>
+                <hr className={styles._separator} />
+                <p>TWITTER</p>
+                <p>@buscao_</p>
+                <hr className={styles._separator} />
+              </div>
+
+              <div className={styles._buttons}>
+                <button className={styles._whiteBtn}>Compra Criptos</button>
+                <button className={styles._blueBtn}>Paga con Criptos</button>
+              </div>
+
+              <div className={styles._footer}>
+                <div className={styles._logosParent}>
+                  <img src='images/logos/logo.svg' width="110px" />
+                  <div>
+
+                    <a href='https://www.thecodeworkers.com/' target='_blank'>
+                      <img src='images/logos/tcw-logo.svg' width="20px" className={styles._tcwLogo} />
+                    </a>
+
+                    <img src='images/logos/banana-logo.svg' width="20px" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <style jsx>{`
+      ._mainResponsive {
+        background-color: ${background};
+        padding: 1.4rem 0px;
+        display: flex;
+        justify-content: center;
+      }
+    `}</style>
+    </>
+  )
+};
+
+export default ResponsiveNavbar;
+
+{/* <ul className={styles._list}>
             <Link href="/commerces">
               <li>Comercios</li>
             </Link>
@@ -54,20 +134,4 @@ const ResponsiveNavbar = ({ background }) => {
               </div>
 
             </li>
-          </ul>
-        </div>
-      </div>
-
-      <style jsx>{`
-      ._mainResponsive {
-        background-color: ${background};
-        padding: 1.4rem 0px;
-        display: flex;
-        justify-content: center;
-      }
-    `}</style>
-    </>
-  )
-};
-
-export default ResponsiveNavbar;
+          </ul> */}
