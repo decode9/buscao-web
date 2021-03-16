@@ -21,6 +21,10 @@
     top: -50px;
     right: -30px;
     z-index: 3;
+
+    @include responsive(md) {
+      border-radius: 0;
+    }
   }
 
   ._visible {

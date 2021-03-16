@@ -68,7 +68,7 @@ const commerce: NextPage = () => {
               <Currency key={company ? company.id : []} currenciesData={company ? { currencies: company.commerce.paymentmethods } : []} />
             </section>
           </div>
-          <div className={(company) ? '' : styles._hideMap}>
+          <div className={(company) ? styles._mapContainer : styles._hideMap}>
             {(company) ? '' : <div className={styles._hide}><p>No Disponible</p></div>}
             <iframe
               src='https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d12329023.712065306!2d-91.10433262499994!3d41.0249156380248!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sve!4v1613662529659!5m2!1ses!2sve'>
