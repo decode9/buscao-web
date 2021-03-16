@@ -51,6 +51,13 @@
         justify-content: space-between;
     }
 
+    ._activeCommerce {
+        color: $mineShaft;
+        svg {
+            fill: $mineShaft;
+        }
+    }
+
     ._active {
         color: $blueRibbon;
         svg {
@@ -155,6 +162,12 @@
                 color: $aquaHaze;
                 svg {
                     fill: $aquaHaze;
+                }
+            }
+            ._activeCommerce {
+                color: $mineShaft;
+                svg {
+                    fill: $mineShaft;
                 }
             }
             select {

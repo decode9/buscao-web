@@ -54,6 +54,7 @@ const Search = () => {
     if (pathname == '/' || pathname == '/commerce') router.push('/commerces')
   }
 
+
   return (
     <div className={styles._searchContent}>
       {currentStates.length ? (
@@ -62,7 +63,7 @@ const Search = () => {
             <Checkbox color={checkedOne ? '#1652F0' : '#93959A'} />
           </div>
           <div className={styles._select}>
-            <label style={{ display: 'flex' }} htmlFor="state" className={checkedOne ? styles._active : styles._inactive} >
+            <label style={{ display: 'flex' }} htmlFor="state" className={checkedOne ? (router.pathname === '/commerce') ? styles._activeCommerce : styles._active : styles._inactive} >
               <label htmlFor='state'>UBICACIÓN</label>
               <div className={styles._dropdown}> <DropDown /> </div>
             </label>
@@ -78,7 +79,7 @@ const Search = () => {
           <Checkbox color={checkedTwo ? '#1652F0' : '#93959A'} />
         </div>
         <div className={styles._select}>
-          <label style={{ display: 'flex' }} htmlFor='category' className={checkedTwo ? styles._active : styles._inactive}>
+          <label style={{ display: 'flex' }} htmlFor='category' className={checkedTwo ? (router.pathname === '/commerce') ? styles._activeCommerce : styles._active : styles._inactive}>
             <label htmlFor='category'>CATEGORIAS</label>
             <div className={styles._dropdown}> <DropDown /> </div>
           </label>
