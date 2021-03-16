@@ -141,6 +141,7 @@
         background-color: #eff4f6;
         padding: 10px 20px;
         border-radius: 50px;
+        margin-top: 5px;
         ._goButton {
             padding: 10px 10px;
         }
@@ -149,7 +150,8 @@
         }
     }
     ._selectContainer {
-        width: 310px;
+        margin: 5px auto;
+        width: 260px;
         padding: 0px;
         justify-content: space-between;
         &::after {
