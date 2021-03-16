@@ -24,6 +24,7 @@ const Commerces = () => {
 
     scrollToResults()
   }, [])
+  
   return (
     <>
       <Head>
