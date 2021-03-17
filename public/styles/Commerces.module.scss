@@ -2,6 +2,10 @@
 
 ._resultsContainer {
   padding: 100px;
+
+  @include responsive(md) {
+    padding: 10%;
+  }
 }
 
 ._notFoundContainer {
