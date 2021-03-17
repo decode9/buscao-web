@@ -1,11 +1,35 @@
 import { useEffect, useState, useRef } from 'react';
 import styles from './styles.module.scss';
 
+const steps = [
+  { number: 0 },
+  { number: 1 },
+  { number: 2 },
+];
+
 const Slider = ({ page }) => {
 
+  const imagesLength = page?.slideshow.length;
   const [currentImage, setCurrentImage] = useState(0);
   const [up, setUp] = useState(true);
+  const [responsive, setResponsive] = useState(false);
+  const [sliderWidth, setSliderWidth] = useState('0%')
+
   const parent = useRef(null);
+
+  useEffect(() => {
+    if (window.innerWidth < 768) setResponsive(true);
+    window.addEventListener('resize', checkWidth);
+    calculateWidth()
+
+    return () => window.removeEventListener('resize', () => { });
+  }, []);
+
+  const checkWidth = () => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    if (mediaQuery.matches) return setResponsive(true);
+    setResponsive(false);
+  };
 
   useEffect(() => {
     sliding(currentImage);
@@ -15,13 +39,13 @@ const Slider = ({ page }) => {
 
   useEffect(() => {
     const container = parent.current;
-    container.addEventListener('wheel', handlerTrackpad, { passive:false });
-    return () => container.removeEventListener('wheel', () => {});
+    container.addEventListener('wheel', handlerTrackpad, { passive: false });
+    return () => container.removeEventListener('wheel', () => { });
   }, []);
 
   const handlerTrackpad = (event: any) => {
     const isTouchPad = event.wheelDeltaY ? event.wheelDeltaY === -3 * event.deltaY : event.deltaMode === 0;
-    if(isTouchPad) event.preventDefault();
+    if (isTouchPad) event.preventDefault();
   }
 
   const sliding = (value) => {
@@ -50,16 +74,28 @@ const Slider = ({ page }) => {
     return styles._circle;
   }
 
+  const calculateWidth = () => {
+    const length = page?.slideshow.length;
+
+    if (length <= 3) {
+      const widthPercent = `${length}00%`
+      setSliderWidth(widthPercent);
+      return;
+    }
+
+    setSliderWidth('300%');
+  }
+
   return (
     <>
       <div className={styles._parent}>
         <div className={styles._sliderParent} ref={parent} >
-          <div className={styles._sliderChild}>
+          <div className='_sliderChild'>
             {
-              page?.slideshow.slice(0, 3).map((item, index) => {
+              page?.slideshow.slice(0, imagesLength <= 3 ? imagesLength : 3).map((item, index) => {
                 return (
-                  <div className={styles._container} key={index} id={item?.image?.id}>
-                    <div style={{ backgroundImage: `url(${item.image.sourceUrl})` }} className={styles._divImage} />
+                  <div className={styles._container} key={index} id={item?.image?.id} >
+                    <div style={{ backgroundImage: `url(${!responsive ? item.image.sourceUrl : item.imageResponsive.sourceUrl})` }} className={styles._divImage} />
                   </div>
                 )
               })
@@ -69,12 +105,21 @@ const Slider = ({ page }) => {
 
         <div className={styles._stepper}>
           <div className={styles._steps}>
-            <div className={checkStep(0)} onClick={() => slide(0)}></div>
-            <div className={checkStep(1)} onClick={() => slide(1)}></div>
-            <div className={checkStep(2)} onClick={() => slide(2)}></div>
+            {
+              steps.slice(0, imagesLength <= 3 ? imagesLength : 3).map((res, index) => {
+                return <div className={checkStep(res.number)} onClick={() => slide(res.number)} key={index}></div>
+              })
+            }
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+      ._sliderChild {
+        width: ${sliderWidth};
+        display: flex;
+      }
+    `}</style>
     </>
   )
 };

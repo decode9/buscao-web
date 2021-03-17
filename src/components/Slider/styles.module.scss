@@ -37,7 +37,6 @@
 
 ._circle {
   @include points($dustyGray);
-
 }
 
 ._currentCircle {
@@ -56,11 +55,11 @@
 }
 
 ._divImage {
-  background-size: 100% 100%;
+  background-size: 100vw;
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
-  height: 75vh;
+  height: 42vw;
 }
 
 ._textParent {
@@ -87,4 +86,10 @@
 ._parent {
   position: relative;
   height: auto;
+}
+
+@include responsive(md) {
+  ._divImage {
+    height: 60vw;
+  }
 }
