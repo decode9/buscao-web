@@ -115,13 +115,12 @@
   position: relative;
 
   & > div {
-    position: absolute;
-    left: 50%;
-    top: 15px;
-
     & > div {
-      position: relative;
-      right: 50%;
+      position: absolute;
+      right: 0;
+      left: 0;
+      margin: 0 auto;
+      width: fit-content;
     }
   }
 }
@@ -242,11 +241,11 @@
   }
 }
 
-@include responsive(lg) {
+@include responsive(md) {
   ._searchBuild {
     position: relative;
     margin: 0 auto;
-    top: 50px;
+    top: 60px;
     & > div {
       position: relative;
       left: 0;

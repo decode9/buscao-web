@@ -75,6 +75,7 @@
   cursor: pointer;
 }
 
+
 ._title {
   font-family: $helveticaNowText;
   font-weight: bold;
@@ -165,5 +166,56 @@
   & p {
     font-family: $helveticaNowText;
     font-size: 1.2rem;
+  }
+}
+
+._buttonsParent {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+._navigationButton {
+  width: 48%;
+  background-color: $geyser;
+  border-radius: 5px;
+  padding: 0.7rem 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  display: none;
+}
+
+@include responsive(lg) {
+  ._cardsParent {
+    padding: 1rem;
+  }
+}
+
+@include responsive(md) {
+  ._cardsParent {
+    width: 100%;
+    padding: 0px 0.2rem;
+  }
+
+  ._leftArrow, ._rightArrow {
+    display: none;
+  }
+
+  ._itemsChild {
+    padding-top: 3.5rem;
+    padding-bottom: 0px;
+  }
+
+  ._itemsParent {
+    flex-direction: column;
+  }
+
+  ._navigationButton {
+    display: flex;
   }
 }
