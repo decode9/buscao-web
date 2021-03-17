@@ -7,10 +7,13 @@ const Welcome = ({ section, title = '' }) => {
   const sourceUrlResponsive = section?.backgroundResponsive?.sourceUrl
 
   const [responsive, setResponsive] = useState(false);
+  const [path, setPath] = useState('');
   
   useEffect(() => {
     if(window.innerWidth < 576) setResponsive(true);
     window.addEventListener('resize', checkWidth);
+
+    setPath(window.location.pathname)
 
     return () => window.removeEventListener('resize', () => {});
   }, []);
@@ -63,11 +66,14 @@ const Welcome = ({ section, title = '' }) => {
 
       <style jsx>{`
         ._main {
-          background-image: url(${responsive ? sourceUrlResponsive : sourceUrl});
+          background-image: ${(path == '/commerces' && responsive) ? ''  : 
+                              (path == '/commerces' && !responsive) ? `url(${sourceUrl})` :
+                              `url(${responsive ? sourceUrlResponsive : sourceUrl})`};
+          background-color: ${path == '/commerces' && responsive ? '#1652F0' : ''};
           background-size: ${responsive ? '100% 100%' : 'cover'};
           background-repeat: no-repeat;
           background-position: center;
-          height: 80vh;
+          height: ${(path == '/commerces' && responsive) ? '30vh' : '80vh'};
           width: 100%;
         }
       `}</style>
