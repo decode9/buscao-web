@@ -28,11 +28,15 @@ const Banner = ({ section }) => {
         background-repeat: no-repeat;
         background-position: center;
         width: 100%;
-        height: 43vw;
+        height: 42vw;
       }
 
       @media (max-width: 992px) {
-        
+        ._container {
+          background-image: url(${section?.backgroundResponsive?.sourceUrl});
+          width: 100%;
+          height: 43vw;
+        }
       }
     `}</style>
     </>
