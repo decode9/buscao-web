@@ -1,9 +1,13 @@
-import { memo } from 'react'
+import { memo, useRef } from 'react'
 import styles from './styles.module.scss'
 
-const Banner = ({ section }) => (
+const Banner = ({ section}) => {
+
+  const bannerRef = useRef();
+
+  return(
   <>
-    <div className="_container">
+    <div className="_container" ref={bannerRef}>
       <div className={styles._leftColumn}>
         <div className={styles._leftColumn__resize}>
           <div className={styles._imageContainer}>
@@ -27,6 +31,7 @@ const Banner = ({ section }) => (
       }
     `}</style>
   </>
-)
+  )
+}
 
 export default memo(Banner)
