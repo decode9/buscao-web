@@ -1,6 +1,6 @@
 @import '../../../public/styles/index.scss';
 
- ._main {
+._main {
   height: 80vh;
   width: 100%;
   background-size: cover;
@@ -35,7 +35,7 @@
   font-weight: 700;
 }
 
-._descriptionContainer  {
+._descriptionContainer {
   width: 90%;
 }
 
@@ -48,7 +48,7 @@
   background-color: $aquaHaze;
   border-radius: 50px;
   min-height: 12%;
-  display:flex;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   width: 50%;
@@ -72,7 +72,7 @@
 }
 
 ._searchContent {
-  display:flex;
+  display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -95,17 +95,16 @@
 }
 
 ._input {
-  border:none;
+  border: none;
   border-bottom: 1px solid $nepal;
   color: $bombay;
   background-color: transparent;
   font-weight: 600;
   font-family: $helveticaNowText;
-
 }
 
 ._input:focus {
-  outline:none;
+  outline: none;
 }
 
 ._blueButtom {
@@ -120,12 +119,12 @@
 
 ._selectsContainer {
   display: block;
-  width:20%;
-  border-right:1px solid $nepal
+  width: 20%;
+  border-right: 1px solid $nepal;
 }
 
 ._inputContainer {
-  width:20%;
+  width: 20%;
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -185,5 +184,26 @@
 
   & > p {
     margin-bottom: 14px;
+  }
+}
+
+@include responsive(lg) {
+  ._searchBuild {
+    position: relative;
+    margin: 0 auto;
+    top: 50px;
+    & > div {
+      position: relative;
+      left: 0;
+      top: unset;
+
+      & > div {
+        position: relative;
+        right: 0;
+      }
+    }
+  }
+  ._blackfloor {
+    height: 300px;
   }
 }

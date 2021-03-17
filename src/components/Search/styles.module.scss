@@ -1,4 +1,4 @@
-@import "../../../public/styles/index.scss";
+@import '../../../public/styles/index.scss';
 
 ._searchContent {
     display: flex;
@@ -23,18 +23,15 @@
         width: 2px;
         height: 35px;
         background: $nepal;
-        content: " ";
+        content: ' ';
         border-radius: 50px;
     }
 }
 
-
 ._radioContainer {
-  width: 20px;
-  height: 20px;
+    width: 20px;
+    height: 20px;
 }
-
-
 
 ._select {
     display: flex;
@@ -43,12 +40,35 @@
     justify-content: center;
     align-items: flex-start;
     padding-right: 3rem;
-    label {
 
-      font-weight: 600;
-      font-family: $helveticaNowTextBold;
-      font-size: 0.875rem;
-      line-height: 1.5;
+    label {
+        font-weight: 600;
+        font-family: $helveticaNowTextBold;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    ._activeCommerce {
+        color: $mineShaft;
+        svg {
+            fill: $mineShaft;
+        }
+    }
+
+    ._active {
+        color: $blueRibbon;
+        svg {
+            fill: $blueRibbon;
+        }
+    }
+    ._inactive {
+        color: $manatee;
+        svg {
+            fill: $manatee;
+        }
     }
     select {
         background: none;
@@ -65,11 +85,9 @@
 }
 
 ._dropdown {
-  width:10px;
-  margin-left: 10px;
+    width: 10px;
+    margin-left: 10px;
 }
-
-
 
 ._inputContainer {
     display: flex;
@@ -89,7 +107,7 @@
         padding-bottom: 0.5rem;
         margin-right: 1rem;
         margin-top: 5px;
-        &::placeholder  {
+        &::placeholder {
             color: $bombay;
         }
     }
@@ -106,4 +124,57 @@
     font-family: $helveticaNowText;
     cursor: pointer;
     margin-left: 1rem;
+}
+
+@include responsive(lg) {
+    ._searchContent {
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        flex-direction: column;
+        background-color: transparent;
+        height: auto;
+    }
+
+    ._inputContainer {
+        width: 310px;
+        background-color: #eff4f6;
+        padding: 10px 20px;
+        border-radius: 50px;
+        margin-top: 5px;
+        ._goButton {
+            padding: 10px 10px;
+        }
+        input {
+            border: none;
+        }
+    }
+    ._selectContainer {
+        margin: 5px auto;
+        width: 260px;
+        padding: 0px;
+        justify-content: space-between;
+        &::after {
+            content: none;
+        }
+        ._select {
+            padding: 0.5rem 1rem;
+            width: 100%;
+            ._active {
+                color: $aquaHaze;
+                svg {
+                    fill: $aquaHaze;
+                }
+            }
+            ._activeCommerce {
+                color: $mineShaft;
+                svg {
+                    fill: $mineShaft;
+                }
+            }
+            select {
+                width: 100%;
+            }
+        }
+    }
 }
