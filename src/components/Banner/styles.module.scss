@@ -1,14 +1,15 @@
 @import '../../../public/styles/index.scss';
 
 ._content {
-  width: 70%;
+  width: 37vw;
 
   & * {
     font-family: $helveticaNowText;
   }
 
   & p {
-    font-size: 20px;
+    font-size: 1.05vw;
+    margin-bottom: 1vw;
   }
 }
 
@@ -25,11 +26,52 @@
 ._imageContainer {
   display: flex;
   height: 30%;
-  align-items: flex-end
+  align-items: flex-end;
 }
 
 ._textContainer {
   display: flex;
-  height: 80%;
+  height: auto;
   padding-top: 5%;
+}
+
+@include responsive(lg) {
+  ._leftColumn {
+    height: 100%;
+    padding: 0%;
+
+    &__resize {
+      height: 35vw;
+      width: 70%;
+      margin: 0 auto;
+    }
+  }
+
+  ._imageContainer {
+    display: flex;
+    height: 30%;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  ._content {
+    width: 100%;
+  
+    & * {
+      font-family: $helveticaNowText;
+    }
+  
+    & p {
+      font-size: 1.7vw;
+      margin-bottom: 0.5vw;
+    }
+  }
+
+  ._textContainer {
+    display: flex;
+    height: auto;
+    padding-top: 5%;
+  }
+
+  
 }
