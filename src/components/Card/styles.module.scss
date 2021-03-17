@@ -74,6 +74,11 @@
 
   ._call {
     text-decoration: none;
+
+    @include responsive(md) {
+      font-size: 12px;
+      padding: 0.8rem 0.3rem;
+    }
   }
 }
 
@@ -156,8 +161,22 @@
   align-items: center;
   width: 60%;
 
+  svg {
+    width: 40px;
+    height: 20px;
+  }
+
+  @include responsive(md) {
+    font-size: 12px;
+
+    svg {
+      width: 25px;
+    }
+  }
+
   & p {
-    margin-right: 0.2rem
+    margin-right: 0.2rem;
+    width: 95%;
   }
 }
 
