@@ -3,8 +3,9 @@ import { World, Toggle } from '../../../public/images/icons'
 import styles from './styles.module.scss'
 import Link from 'next/link';
 import { ResposiveNavbar, Location } from '../../components';
+import { scrolling } from '../../utils/common';
 
-const Navbar = ({ background = '#1652F0' }: any) => {
+const Navbar = ({ background = '#1652F0', reference }: any) => {
 
   const [responsive, setResponsive] = useState(false);
 
@@ -39,7 +40,7 @@ const Navbar = ({ background = '#1652F0' }: any) => {
             <Link href='/commerces'>
               <p className={styles._textLink}> Comercios </p>
             </Link>
-            <p className={styles._textLink}> Nosotros </p>
+            <p className={styles._textLink} onClick={() => scrolling(reference)}> Nosotros </p>
             <div className={styles._btnParent}>
               <a href='https://cryptobuyer.io' target='_blank'>
                 <button className={styles._btnLink} > Cryptobuyer.io </button>
@@ -63,7 +64,7 @@ const Navbar = ({ background = '#1652F0' }: any) => {
           </div>
         </div>
       </div>
-    </div> : <ResposiveNavbar background={background} />
+    </div> : <ResposiveNavbar background={background} reference={reference} />
     }
 
       <style jsx>{`

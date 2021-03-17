@@ -4,8 +4,12 @@ import { Toggle } from '../../../public/images/icons';
 import Link from 'next/link'
 import { Location } from '../';
 import { World } from '../../../public/images/icons';
+import { scrolling } from '../../utils/common';
+import { useRouter } from 'next/router';
 
-const ResponsiveNavbar = ({ background }) => {
+const ResponsiveNavbar = ({ background, reference }) => {
+
+  const router = useRouter();
 
   const [show, setShow] = useState(0);
   const [currentClass, setCurrentClass] = useState(styles._static);
@@ -19,6 +23,15 @@ const ResponsiveNavbar = ({ background }) => {
     if (show == 1) setCurrentClass(styles._menu);
     if (show == 2) setCurrentClass(styles._menuHidden);
   }, [show])
+
+  const goToAboutUs = () => {
+
+    if(router.pathname == '/') {
+      scrolling(reference)
+      showMenu()
+      return;
+    }
+  }
 
   return (
     <>
@@ -56,29 +69,34 @@ const ResponsiveNavbar = ({ background }) => {
               </div>
               <div className={styles._links}>
                 <Link href='/commerces'>
-                  <p>Comercios</p>
+                  <p >Comercios</p>
                 </Link>
 
                 <hr className={styles._separator} />
-                <p>Nosotros</p>
+                  <p onClick={goToAboutUs}>Nosotros</p>
                 <hr className={styles._separator} />
               </div>
 
               <div className={styles._contact}>
-                <p>CONTÁCTANOS</p>
+                <p className={styles._bold}>CONTÁCTANOS</p>
                 <p>info@buscao.com</p>
                 <hr className={styles._separator} />
-                <p>INSTAGRAM</p>
+                <p className={styles._bold}>INSTAGRAM</p>
                 <p>@buscao_</p>
                 <hr className={styles._separator} />
-                <p>TWITTER</p>
+                <p className={styles._bold}>TWITTER</p>
                 <p>@buscao_</p>
                 <hr className={styles._separator} />
               </div>
 
               <div className={styles._buttons}>
-                <button className={styles._whiteBtn}>Compra Criptos</button>
-                <button className={styles._blueBtn}>Paga con Criptos</button>
+                <a href='https://cryptobuyer.io/es/' target='_blank' className={styles._tag}>
+                  <button className={styles._whiteBtn} >Compra Criptos</button>
+                </a>
+
+                <a href='https://cryptobuyer.io/es/' target='_blank' className={styles._tag}>
+                  <button className={styles._blueBtn}>Paga con Criptos</button>
+                </a>
               </div>
 
               <div className={styles._footer}>
@@ -113,25 +131,3 @@ const ResponsiveNavbar = ({ background }) => {
 };
 
 export default ResponsiveNavbar;
-
-{/* <ul className={styles._list}>
-            <Link href="/commerces">
-              <li>Comercios</li>
-            </Link>
-
-            <li>Nosotros</li>
-
-            <li>
-              <a href='https://cryptobuyer.io' target='_blank'>
-                <button className={styles._btnLink} > Cryptobuyer.io </button>
-              </a>
-            </li>
-
-            <li className={styles._locationParent}>
-              <Location color='#353535' />
-              <div className={styles._worldParent}>
-                <World color='#353535' />
-              </div>
-
-            </li>
-          </ul> */}

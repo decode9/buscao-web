@@ -150,6 +150,7 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+
 }
 
 ._buttons {
@@ -162,6 +163,10 @@
 
 ._blueBtn {
   @include btn($blueRibbon, $white);
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 ._whiteBtn {
@@ -181,4 +186,14 @@
 
 ._rightSide {
   display: flex;
+}
+
+._bold {
+  font-weight: 600;
+}
+
+._tag {
+  &:hover {
+    text-decoration: none !important;
+  }
 }
