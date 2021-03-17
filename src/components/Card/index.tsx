@@ -28,12 +28,13 @@ const processMinutes = (time) => {
 
 const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true, showAddress = true, id }) => {
   const [status, setStatus] = useState(false)
+  const [path, setPath] = useState('')
   const dispatch = useDispatch()
   const router = useRouter()
 
   const redirect = () => {
-    let path = window.location.pathname == '/commerce' ? false : true
-    if(path) {
+    let path = window.location.pathname
+    if(path != '/commerce') {
       const id = content.id;
       dispatch(setLoader(true));
       dispatch(setSelectedCommerce(id));
@@ -81,10 +82,12 @@ const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true
     }
 
     if (showClock) setStatus(checkSchedule())
+
+    setPath(window.location.pathname) 
   }, [])
 
   return (
-    <div className={styles._cardPrincipalContainer}>
+    <div className={path != '/commerce' ? styles._commerces : styles._commerce}>
       <div className={styles._card} onClick={redirect}>
         <div className={styles._imageParent}>
           <img src={(content) ? content?.commerce?.image : 'images/logos/buscao-big-logo.svg'} width='40%' height='100%'></img>
