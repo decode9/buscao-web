@@ -60,6 +60,7 @@
   margin-left: auto;
   margin-right: auto;
   width: $width;
+  cursor: pointer;
 
   @if($margin){
     margin-bottom: $margin;
@@ -70,15 +71,10 @@
   display: flex;
   justify-content: space-between;
   width: 35%;
-
 }
 
 ._blueBtn {
   @include btn($blueRibbon, $white, null, 180px);
-
-  &:hover {
-    text-decoration: none;
-  }
 }
 
 ._whiteBtn {
@@ -86,7 +82,6 @@
 }
 
 @include responsive(xxl) {
-
   ._buttons {
     width: 40%;
     display: flex;
@@ -95,7 +90,6 @@
 }
 
 @include responsive(xl) {
-
   ._buttons {
     width: 35%;
     display: flex;
@@ -107,11 +101,9 @@
   ._whiteBtn{
     @include btn($white, $blueRibbon, 5px, 130px);
   }
-
 }
 
 @include responsive(lg) {
-
   ._buttons {
     display: block;
     width: 25%;
@@ -122,6 +114,12 @@
   }
   ._whiteBtn{
     @include btn($white, $blueRibbon, 5px, 140px);
+  }
+}
+
+._tag {
+  &:hover {
+    text-decoration: none !important;
   }
 }
 
