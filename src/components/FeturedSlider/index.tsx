@@ -78,7 +78,6 @@ const FeaturedSlider = ({ posts }) => {
       const stringWidth = width.toString();
       setSliderWidth(`${stringWidth}00%`)
     }
-
   }
 
   const pagesArray = () => {
