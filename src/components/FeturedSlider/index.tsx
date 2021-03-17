@@ -14,29 +14,29 @@ const FeaturedSlider = ({ posts }) => {
 
   const [sliderWidth, setSliderWidth] = useState('0%');
   const [page, setPage] = useState(1);
-  const [ responsive, setResponsive ] = useState(false);
-
-   useEffect(() => {
-    if(window.innerWidth < 768) setResponsive(true);
-    window.addEventListener('resize', checkWidth);
-
-    return () => window.removeEventListener('resize', () => {});
-  }, []);
-
-  const checkWidth = () => {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-    if (mediaQuery.matches) return setResponsive(true);
-    setResponsive(false);
-  };
+  const [responsive, setResponsive] = useState(false);
 
   useEffect(() => {
-    if(posts.length) calculateWidth();
+    if (window.innerWidth < 768) setResponsive(true);
+    window.addEventListener('resize', checkWidth);
+
+    return () => window.removeEventListener('resize', () => { });
+  }, []);
+
+  useEffect(() => {
+    if (posts.length) calculateWidth();
   }, [posts])
 
   useEffect(() => {
     pagesArray();
     calculateWidth();
   }, [responsive])
+
+  const checkWidth = () => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    if (mediaQuery.matches) return setResponsive(true);
+    setResponsive(false);
+  };
 
   const nextOrPrevious = (param) => {
     let pagination = page;
@@ -59,7 +59,7 @@ const FeaturedSlider = ({ posts }) => {
 
   const calculateWidth = () => {
 
-    if(!responsive) {
+    if (!responsive) {
       const width = posts.length / 2;
       const stringWidth = width.toString();
 
@@ -73,7 +73,7 @@ const FeaturedSlider = ({ posts }) => {
       setSliderWidth(`${percentWidth}%`);
     }
 
-    if(responsive) {
+    if (responsive) {
       const width = posts.length;
       const stringWidth = width.toString();
       setSliderWidth(`${stringWidth}00%`)
@@ -81,13 +81,13 @@ const FeaturedSlider = ({ posts }) => {
   }
 
   const pagesArray = () => {
-    if(!responsive) {
+    if (!responsive) {
       const length = posts.length / 2;
       const lengthRounded = Math.round(length);
       return lengthRounded;
     }
 
-    if(responsive) {
+    if (responsive) {
       const length = posts.length;
       return length;
     }
@@ -137,6 +137,20 @@ const FeaturedSlider = ({ posts }) => {
             <div className={styles._rightArrow} onClick={() => nextOrPrevious('right')}>
               <ArrowRight color='#FFFFFF' />
             </div>
+
+            {
+              responsive &&
+              <div className={styles._buttonsParent}>
+                <button className={styles._navigationButton} onClick={() => nextOrPrevious('left')}>
+                  <ArrowLeft color='#5D77BC' />
+                </button>
+
+                <button className={styles._navigationButton} onClick={() => nextOrPrevious('right')}>
+                  <ArrowRight color='#5D77BC' />
+                </button>
+              </div>
+            }
+
           </div>
           :
           (<div className={styles._messageParent}>
@@ -151,6 +165,8 @@ const FeaturedSlider = ({ posts }) => {
         width: ${sliderWidth}
       }
     `}</style>
+
+
     </>
   )
 };
