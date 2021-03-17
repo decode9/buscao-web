@@ -75,6 +75,13 @@
   cursor: pointer;
 }
 
+@include responsive(md) {
+  ._cardsParent {
+    width: 100%;
+    padding: 0px 0.2rem;
+  }
+}
+
 ._title {
   font-family: $helveticaNowText;
   font-weight: bold;

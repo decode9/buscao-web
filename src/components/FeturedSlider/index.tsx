@@ -14,10 +14,29 @@ const FeaturedSlider = ({ posts }) => {
 
   const [sliderWidth, setSliderWidth] = useState('0%');
   const [page, setPage] = useState(1);
+  const [ responsive, setResponsive ] = useState(false);
+
+   useEffect(() => {
+    if(window.innerWidth < 768) setResponsive(true);
+    window.addEventListener('resize', checkWidth);
+
+    return () => window.removeEventListener('resize', () => {});
+  }, []);
+
+  const checkWidth = () => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    if (mediaQuery.matches) return setResponsive(true);
+    setResponsive(false);
+  };
 
   useEffect(() => {
     if(posts.length) calculateWidth();
   }, [posts])
+
+  useEffect(() => {
+    pagesArray();
+    calculateWidth();
+  }, [responsive])
 
   const nextOrPrevious = (param) => {
     let pagination = page;
@@ -39,23 +58,40 @@ const FeaturedSlider = ({ posts }) => {
   }
 
   const calculateWidth = () => {
-    const width = posts.length / 2;
-    const stringWidth = width.toString();
 
-    if (stringWidth.includes('.')) {
-      const newWidth = (width + 0.5) * 100;
-      setSliderWidth(`${newWidth}%`);
-      return;
+    if(!responsive) {
+      const width = posts.length / 2;
+      const stringWidth = width.toString();
+
+      if (stringWidth.includes('.')) {
+        const newWidth = (width + 0.5) * 100;
+        setSliderWidth(`${newWidth}%`);
+        return;
+      }
+
+      const percentWidth = width * 100;
+      setSliderWidth(`${percentWidth}%`);
     }
 
-    const percentWidth = width * 100;
-    setSliderWidth(`${percentWidth}%`);
+    if(responsive) {
+      const width = posts.length;
+      const stringWidth = width.toString();
+      setSliderWidth(`${stringWidth}00%`)
+    }
+
   }
 
   const pagesArray = () => {
-    const length = posts.length / 2;
-    const lengthRounded = Math.round(length);
-    return lengthRounded;
+    if(!responsive) {
+      const length = posts.length / 2;
+      const lengthRounded = Math.round(length);
+      return lengthRounded;
+    }
+
+    if(responsive) {
+      const length = posts.length;
+      return length;
+    }
   }
 
   return (
@@ -78,7 +114,7 @@ const FeaturedSlider = ({ posts }) => {
                         <div className={styles._cards}>
 
                           {
-                            paginate(posts, page, 2).map((item, index) => {
+                            paginate(posts, page, responsive ? 1 : 2).map((item, index) => {
                               return (
                                 <div className={styles._cardsParent} key={index}>
                                   <Currency currenciesData={{ currencies: item?.commerce?.paymentmethods }}>
