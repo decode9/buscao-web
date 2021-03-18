@@ -7,12 +7,12 @@ const Welcome = ({ section, title = '' }) => {
   const sourceUrlResponsive = section?.backgroundResponsive?.sourceUrl
 
   const [responsive, setResponsive] = useState(false);
-  
+
   useEffect(() => {
     if(window.innerWidth < 576) setResponsive(true);
     window.addEventListener('resize', checkWidth);
 
-    return () => window.removeEventListener('resize', () => {});
+    return () => window.removeEventListener('resize', checkWidth);
   }, []);
 
   const checkWidth = () => {

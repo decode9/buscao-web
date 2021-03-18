@@ -10,7 +10,7 @@ const Footer = () => {
     if (window.innerWidth < 768) setResponsive(true);
     window.addEventListener('resize', checkWidth);
 
-    return () => window.removeEventListener('resize', () => { });
+    return () => window.removeEventListener('resize', checkWidth);
   }, []);
 
   const checkWidth = () => {
