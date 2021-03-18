@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import { useSelector } from 'react-redux';
 
+let interval;
+
 const Loader = () => {
 
   const { loader: { show } } = useSelector(state => state);
@@ -9,10 +11,11 @@ const Loader = () => {
 
   useEffect(() => {
     changeClass();
+    return () => clearTimeout(interval)
   }, [currentSquare])
 
   const changeClass = () => {
-    setTimeout(() => {
+    interval = setTimeout(() => {
       if (currentSquare <= 2) return setCurrentSquare(currentSquare + 1);
       if(currentSquare == 3) setCurrentSquare(0)
     }, 1000);

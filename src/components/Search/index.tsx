@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux'
 import { filterPosts, setFilter } from '../../store/actions';
@@ -53,7 +53,6 @@ const Search = () => {
     const pathname = router.pathname
     if (pathname == '/' || pathname == '/commerce') router.push('/commerces')
   }
-
 
   return (
     <div className={styles._searchContent}>
