@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux'
 import { filterPosts, setFilter } from '../../store/actions';
@@ -8,8 +8,12 @@ import styles from './styles.module.scss'
 const Search = () => {
   const dispatch = useDispatch()
   const router = useRouter()
+  const { filter, countryPosts } = useSelector(state => state.post);
 
-  const { filter } = useSelector(state => state.post);
+  useEffect(() => {
+    return () => { if (router.route == '/commerces') changeState('') }
+  }, [countryPosts])
+
 
   const [checkedOne, setCheckedOne]: any = useState(filter.checkedOne)
   const [checkedTwo, setCheckedTwo]: any = useState(filter.checkedTwo)
@@ -17,13 +21,6 @@ const Search = () => {
   const { categories, currentStates } = useSelector(state => state.resource);
 
   const [select, setSelect]: any = useState({ state: filter.state, category: filter.category, title: filter.title, checkedOne: checkedOne, checkedTwo: checkedTwo })
-
-  const changeState = (value) => {
-    dispatch(filterPosts(value, 'state'))
-    setSelect({ ...select, ...{ state: value, category: '', title: '' } })
-    dispatch(setFilter({ ...select, ...{ state: value, category: '', title: '', checkedOne: checkedOne, checkedTwo: checkedTwo } }))
-    if (value && router.route == '/') redirectToResults()
-  }
 
   const checkStateOne = () => {
     changeState('')
@@ -34,6 +31,22 @@ const Search = () => {
     setCheckedTwo(!checkedTwo)
   }
 
+  const changeState = (value) => {
+    dispatch(filterPosts(value, 'state'))
+    setSelect({ ...select, ...{ state: value, category: '', title: '' } })
+    dispatch(setFilter({ ...select, ...{ state: value, category: '', title: '', checkedOne: checkedOne, checkedTwo: checkedTwo } }))
+    if (value && router.route == '/') redirectToResults()
+  }
+
+
+  const changeTitle = () => {
+    const title = select.title
+    dispatch(filterPosts(title, 'title'))
+    dispatch(setFilter(select))
+
+    if (title) redirectToResults()
+  }
+
   const changeCategory = (value) => {
     dispatch(filterPosts(value, 'categories'))
     setSelect({ ...select, ...{ category: value, title: '', checkedOne: checkedOne, checkedTwo: checkedTwo } })
@@ -41,13 +54,7 @@ const Search = () => {
     if (value) redirectToResults()
   }
 
-  const changeTitle = (event) => {
-    const title = select.title
-    dispatch(filterPosts(title, 'title'))
-    dispatch(setFilter(select))
 
-    if (title) redirectToResults()
-  }
 
   const redirectToResults = () => {
     const pathname = router.pathname
