@@ -27,7 +27,7 @@ const Welcome = ({ section, title = '' }) => {
   return (
     <>
       <div className={"_main"}>
-        <div className={styles._container}>
+        <div className={[styles._container, 'container'].join(" ")}>
           <div className={styles._centerContainer}>
             <div className={styles._titleContainer}>
               <p className={styles._title}>{section?.title}</p>
@@ -56,7 +56,7 @@ const Welcome = ({ section, title = '' }) => {
                   <div></div>
                 </div>
                 <div className={styles._keywordContainer}>
-                  <p>{title}</p>
+                  <p className='_keywordTitle'>{title}</p>
                 </div>
               </div>
             ) : null
@@ -76,6 +76,14 @@ const Welcome = ({ section, title = '' }) => {
           height: ${(path == '/commerces' && responsive) ? '30vh' : '80vh'};
           width: 100%;
         }
+
+        ._keywordTitle {
+          margin-bottom: ${(responsive && title.length > 15) ? '0%' : '14px'};
+        }
+
+        .container {
+          height: ${(path == '/commerces' && responsive) ? '25vh'  : 
+                  (path == '/commerces' && !responsive) ? '' : ''};
       `}</style>
     </>
   )
