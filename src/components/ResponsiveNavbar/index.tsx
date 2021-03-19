@@ -27,12 +27,6 @@ const ResponsiveNavbar = ({ background, reference }) => {
     if (show == 2) setCurrentClass(styles._menuHidden);
   }, [show])
 
-  // const goToAboutUs = () => {
-  //   if(router.pathname == '/') {
-
-  //     return;
-  //   }
-  // }
 
   const goToAboutUs = () => {
     if(router.pathname != '/') {
@@ -106,7 +100,7 @@ const ResponsiveNavbar = ({ background, reference }) => {
                   <button className={styles._whiteBtn} >Compra Criptos</button>
                 </a>
 
-                <a href='https://cryptobuyer.io/es/' target='_blank' className={styles._tag}>
+                <a href='https://pay.cryptobuyer.io/accounts/signup/' target='_blank' className={styles._tag}>
                   <button className={styles._blueBtn}>Paga con Criptos</button>
                 </a>
               </div>
