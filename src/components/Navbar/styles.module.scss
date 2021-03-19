@@ -37,25 +37,6 @@
   align-items: center;
 }
 
-._btnLink {
-  font-family: $helveticaNowTextBold;
-  background-color:$aquaHaze;
-  color: $mineShaft;
-  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-  cursor: pointer;
-  border-radius: 5px;
-  border: 2px solid $aquaHaze;
-  transition: 0.6s;
-  margin-left: 3.8rem;
-  font-size: 0.8rem;
-
-  &:hover {
-    background: $blueRibbon;
-    color: $aquaHaze;
-    transition: all 0.6s;
-  }
-}
-
 ._rightText {
   display: flex;
   align-items: center;
