@@ -6,11 +6,13 @@ const Welcome = ({ section, title = '' }) => {
   const sourceUrl = section?.background?.sourceUrl
   const sourceUrlResponsive = section?.backgroundResponsive?.sourceUrl
 
-  const [responsive, setResponsive] = useState(false);
+  const [responsive, setResponsive] = useState('');
   const [path, setPath] = useState('');
   
   useEffect(() => {
-    if(window.innerWidth < 576) setResponsive(true);
+    if(window.innerWidth <= 576) setResponsive('576');
+    if(window.innerWidth <= 768) setResponsive('768');
+    if(window.innerWidth > 768) setResponsive('769');
     window.addEventListener('resize', checkWidth);
 
     setPath(window.location.pathname)
@@ -18,11 +20,11 @@ const Welcome = ({ section, title = '' }) => {
   }, []);
 
   const checkWidth = () => {
-    const mediaQuery = window.matchMedia('(max-width: 576px)');
-    if (mediaQuery.matches) return setResponsive(true);
-    setResponsive(false);
+    if(window.matchMedia('(max-width: 576px) and (min-width: 370px)').matches) return setResponsive('576');
+    if(window.matchMedia('(max-width: 768px) and (min-width: 577px)').matches) return setResponsive('768');
+    if(window.matchMedia('(min-width: 769px)').matches) return setResponsive('769');
   };
-
+  
   return (
     <>
       <div className={"_main"}>
@@ -65,24 +67,24 @@ const Welcome = ({ section, title = '' }) => {
 
       <style jsx>{`
         ._main {
-          background-image: ${(path == '/commerces' && responsive) ? ''  : 
-                              (path == '/commerces' && !responsive) ? `url(${sourceUrl})` :
-                              `url(${responsive ? sourceUrlResponsive : sourceUrl})`};
-          background-color: ${path == '/commerces' && responsive ? '#1652F0' : ''};
-          background-size: ${responsive ? '100% 100%' : 'cover'};
+          background-image: ${(path == '/commerces' && responsive <= '576') ? ''  : 
+                              (path == '/commerces' && responsive > '576') ? `url(${sourceUrl})` :
+                              `url(${responsive < '768' ? sourceUrlResponsive : sourceUrl})`};
+          background-color: ${path == '/commerces' && responsive <= '576' ? '#1652F0' : ''};
+          background-size: ${responsive <= '576' ? '100% 100%' : 'cover'};
           background-repeat: no-repeat;
           background-position: center;
-          height: ${(path == '/commerces' && responsive) ? '30vh' : '80vh'};
+          height: ${(path == '/commerces' && responsive <= '576') ? '30vh' : '80vh'};
           width: 100%;
         }
 
         ._keywordTitle {
-          margin-bottom: ${(responsive && title.length > 15) ? '0%' : '14px'};
+          margin-bottom: ${(title.length > 15) ? '0%' : '14px'};
         }
 
         .container {
-          height: ${(path == '/commerces' && responsive) ? '25vh'  : 
-                  (path == '/commerces' && !responsive) ? '' : ''};
+          height: ${(path == '/commerces' && responsive <= '576') ? '25vh'  : ''};
+                  
       `}</style>
     </>
   )
