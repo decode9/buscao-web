@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { useState} from 'react';
-=======
 import { useEffect, useState } from 'react';
->>>>>>> a830de9dedd0c7d7cc7b7c7eac9d1b922d07195a
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux'
 import { filterPosts, setFilter } from '../../store/actions';

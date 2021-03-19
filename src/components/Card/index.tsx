@@ -34,7 +34,7 @@ const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true
 
   const redirect = () => {
     let path = window.location.pathname
-    if(path != '/commerce') {
+    if (path != '/commerce') {
       const id = content.id;
       dispatch(setLoader(true));
       dispatch(setSelectedCommerce(id));
@@ -83,7 +83,7 @@ const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true
 
     if (showClock) setStatus(checkSchedule())
 
-    setPath(window.location.pathname) 
+    setPath(window.location.pathname)
   }, [])
 
   return (
@@ -96,7 +96,8 @@ const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true
         <div className={styles._minicard}>
           <div>
             <span className={styles._title}> {content?.title || 'No Disponible'} </span><br />
-            <span className={styles._text}> {content?.commerce?.description || 'Categoria'} </span>
+            <span className={styles._text}> {(content?.categories?.nodes?.length) ?
+              content?.categories?.nodes?.map((value, index) => <p key={index}>{value.name}</p>) : '' || 'Categoria'} </span>
           </div>
 
           {
@@ -122,12 +123,12 @@ const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true
 
         {
           content ?
-          <a className={styles._call} href={(subsidiary) ? `tel:${(subsidiary.phoneNumber).replace(/\s/g, '')}` : `tel:${(content?.commerce?.subsidiary[0]?.phoneNumber).replace(/\s/g, '')}`} target='_blank'>
-            <div id={(subsidiary) ? subsidiary.phoneNumber : content?.commerce?.subsidiary[0]?.phoneNumber} ></div>
-          </a> :
-          <a className={styles._call} href="#">
-            <div id="-"></div>
-          </a>
+            <a className={styles._call} href={(subsidiary) ? `tel:${(subsidiary.phoneNumber).replace(/\s/g, '')}` : `tel:${(content?.commerce?.subsidiary[0]?.phoneNumber).replace(/\s/g, '')}`} target='_blank'>
+              <div id={(subsidiary) ? subsidiary.phoneNumber : content?.commerce?.subsidiary[0]?.phoneNumber} ></div>
+            </a> :
+            <a className={styles._call} href="#">
+              <div id="-"></div>
+            </a>
         }
 
         {
