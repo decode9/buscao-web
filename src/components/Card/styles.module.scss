@@ -31,6 +31,10 @@
   font-family: $helveticaNowText;
   color: $tundora;
   font-size: 0.75rem;
+  display: flex;
+  p{
+    margin-right: 5px;
+  }
 }
 
 ._imageParent {
@@ -39,6 +43,10 @@
   box-sizing: border-box;
   margin-bottom: 0.5rem;
   height: 6rem;
+  img{
+    height: 100%;
+    width: auto;
+  }
 }
 
 ._statusText {
@@ -207,9 +215,9 @@
     }
   }
 
-  ._longAddress { 
+  ._longAddress {
     width: 100%;
-    
+
     p {
       margin-bottom: 1.5rem;
     }
