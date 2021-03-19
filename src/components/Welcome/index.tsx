@@ -14,8 +14,7 @@ const Welcome = ({ section, title = '' }) => {
     window.addEventListener('resize', checkWidth);
 
     setPath(window.location.pathname)
-
-    return () => window.removeEventListener('resize', () => {});
+    return () => window.removeEventListener('resize', checkWidth);
   }, []);
 
   const checkWidth = () => {
