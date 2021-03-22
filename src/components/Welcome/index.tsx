@@ -6,25 +6,29 @@ const Welcome = ({ section, title = '' }) => {
   const sourceUrl = section?.background?.sourceUrl
   const sourceUrlResponsive = section?.backgroundResponsive?.sourceUrl
 
-  const [responsive, setResponsive] = useState(false);
+  const [responsive, setResponsive] = useState('');
+  const [path, setPath] = useState('');
   
   useEffect(() => {
-    if(window.innerWidth < 576) setResponsive(true);
+    if(window.innerWidth <= 576) setResponsive('576');
+    if(window.innerWidth <= 768) setResponsive('768');
+    if(window.innerWidth > 768) setResponsive('769');
     window.addEventListener('resize', checkWidth);
 
-    return () => window.removeEventListener('resize', () => {});
+    setPath(window.location.pathname)
+    return () => window.removeEventListener('resize', checkWidth);
   }, []);
 
   const checkWidth = () => {
-    const mediaQuery = window.matchMedia('(max-width: 576px)');
-    if (mediaQuery.matches) return setResponsive(true);
-    setResponsive(false);
+    if(window.matchMedia('(max-width: 576px) and (min-width: 370px)').matches) return setResponsive('576');
+    if(window.matchMedia('(max-width: 768px) and (min-width: 577px)').matches) return setResponsive('768');
+    if(window.matchMedia('(min-width: 769px)').matches) return setResponsive('769');
   };
-
+  
   return (
     <>
       <div className={"_main"}>
-        <div className={styles._container}>
+        <div className={[styles._container, 'container'].join(" ")}>
           <div className={styles._centerContainer}>
             <div className={styles._titleContainer}>
               <p className={styles._title}>{section?.title}</p>
@@ -53,7 +57,7 @@ const Welcome = ({ section, title = '' }) => {
                   <div></div>
                 </div>
                 <div className={styles._keywordContainer}>
-                  <p>{title}</p>
+                  <p className='_keywordTitle'>{title}</p>
                 </div>
               </div>
             ) : null
@@ -63,13 +67,24 @@ const Welcome = ({ section, title = '' }) => {
 
       <style jsx>{`
         ._main {
-          background-image: url(${responsive ? sourceUrlResponsive : sourceUrl});
-          background-size: ${responsive ? '100% 100%' : 'cover'};
+          background-image: ${(path == '/commerces' && responsive <= '576') ? ''  : 
+                              (path == '/commerces' && responsive > '576') ? `url(${sourceUrl})` :
+                              `url(${responsive < '768' ? sourceUrlResponsive : sourceUrl})`};
+          background-color: ${path == '/commerces' && responsive <= '576' ? '#1652F0' : ''};
+          background-size: ${responsive <= '576' ? '100% 100%' : 'cover'};
           background-repeat: no-repeat;
           background-position: center;
-          height: 80vh;
+          height: ${(path == '/commerces' && responsive <= '576') ? '30vh' : '80vh'};
           width: 100%;
         }
+
+        ._keywordTitle {
+          margin-bottom: ${(title.length > 15) ? '0%' : '14px'};
+        }
+
+        .container {
+          height: ${(path == '/commerces' && responsive <= '576') ? '25vh'  : ''};
+                  
       `}</style>
     </>
   )

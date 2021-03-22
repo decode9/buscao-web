@@ -24,6 +24,7 @@
 
     @include responsive(md) {
       border-radius: 0;
+      right: unset;
     }
   }
 

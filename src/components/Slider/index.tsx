@@ -22,7 +22,7 @@ const Slider = ({ page }) => {
     window.addEventListener('resize', checkWidth);
     calculateWidth()
 
-    return () => window.removeEventListener('resize', () => { });
+    return () => window.removeEventListener('resize', checkWidth);
   }, []);
 
   const checkWidth = () => {
