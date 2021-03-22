@@ -1,12 +1,18 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { World, Toggle } from '../../../public/images/icons'
 import styles from './styles.module.scss'
 import Link from 'next/link';
 import { ResposiveNavbar, Location } from '../../components';
+import { setScroll } from '../../store/actions';
 import { scrolling } from '../../utils/common';
+import { useSelector, useDispatch} from 'react-redux';
+import { useRouter } from 'next/router'
 
 const Navbar = ({ background = '#1652F0', reference }: any) => {
 
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const { intermittence } = useSelector(state => state)
   const [responsive, setResponsive] = useState(false);
 
   const menuDeploy = () => setResponsive(!responsive);
@@ -24,6 +30,17 @@ const Navbar = ({ background = '#1652F0', reference }: any) => {
     setResponsive(false);
   };
 
+  const navigateToAboutUs = () => {
+    if(router.pathname != '/') {
+      dispatch(setScroll(true))
+      router.push('/')
+      return
+    }
+
+    scrolling(reference)
+  }
+
+
   return (
     <>
     {
@@ -40,12 +57,7 @@ const Navbar = ({ background = '#1652F0', reference }: any) => {
             <Link href='/commerces'>
               <p className={styles._textLink}> Comercios </p>
             </Link>
-            <p className={styles._textLink} onClick={() => scrolling(reference)}> Nosotros </p>
-            <div className={styles._btnParent}>
-              <a href='https://cryptobuyer.io' target='_blank'>
-                <button className={styles._btnLink} > Cryptobuyer.io </button>
-              </a>
-            </div>
+            <p className={styles._textLink} onClick={navigateToAboutUs}> Nosotros </p>
           </div>
         </div>
         <div className={styles._rightSection} >
