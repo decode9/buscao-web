@@ -23,7 +23,6 @@
     z-index: 3;
 
     @include responsive(md) {
-      border-radius: 20;
       right: unset;
     }
   }
