@@ -48,9 +48,15 @@ const makeStore: any = ({ isServer }) => {
     storage
   }
 
+
   const persistedReducer = persistReducer(persistConfig, reducer)
   const store = createStoreHook(persistedReducer)
   store['__persistor'] = persistStore(store, { manualPersist: true })
+
+  blacklist: [
+    'intermittence'
+  ]
+
 
   return store
 }
