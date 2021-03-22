@@ -11,7 +11,7 @@ import { setLoader } from '../store/actions';
 const findDay = () => {
   const options = { weekday: 'long' };
   let date = new Date()
-  let day_week = date.toLocaleDateString(undefined, options)
+  let day_week = date.toLocaleDateString('en-US', options)
   let day_week_arr = day_week.split(',');
   let day = day_week_arr[0].toLowerCase();
   return day;
