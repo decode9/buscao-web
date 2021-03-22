@@ -5,7 +5,7 @@
   width: 100%;
 
   ._currenciesCard {
-    max-width: 270px;
+    max-width: 240px;
     justify-content: flex-start;
     background: $mineShaft;
     border-radius: 20px;
@@ -47,6 +47,7 @@
   }
   ._tooltip {
     position: relative;
+    padding: 0.3rem;
     ._tooltiptext {
       visibility: hidden;
       width: 120px;
