@@ -11,13 +11,13 @@ const Welcome = ({ section, title = '' }) => {
   
   useEffect(() => {
     if(window.innerWidth <= 576) setResponsive('576');
-    if(window.innerWidth <= 768) setResponsive('768');
+    if(window.innerWidth >576 && window.innerWidth <= 768) setResponsive('768');
     if(window.innerWidth > 768) setResponsive('769');
     window.addEventListener('resize', checkWidth);
 
     setPath(window.location.pathname)
     return () => window.removeEventListener('resize', checkWidth);
-  }, []);
+  }, [responsive]);
 
   const checkWidth = () => {
     if(window.matchMedia('(max-width: 576px) and (min-width: 370px)').matches) return setResponsive('576');
@@ -64,12 +64,11 @@ const Welcome = ({ section, title = '' }) => {
           }
         </div>
       </div>
-
       <style jsx>{`
         ._main {
           background-image: ${(path == '/commerces' && responsive <= '576') ? ''  : 
                               (path == '/commerces' && responsive > '576') ? `url(${sourceUrl})` :
-                              `url(${responsive < '768' ? sourceUrlResponsive : sourceUrl})`};
+                              `url(${responsive > '576' ? sourceUrl : sourceUrlResponsive})`};
           background-color: ${path == '/commerces' && responsive <= '576' ? '#1652F0' : ''};
           background-size: ${responsive <= '576' ? '100% 100%' : 'cover'};
           background-repeat: no-repeat;
