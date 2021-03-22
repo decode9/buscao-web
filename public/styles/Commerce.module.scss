@@ -85,7 +85,6 @@
 }
 
 ._cardContainer {
-
   @include responsive(md) {
     margin: 0 10% 1.5rem;
   }
@@ -125,11 +124,17 @@
       width: 75vw;
       height: 35vh;
     }
-  }  
+  }
 }
 
 ._hideMap {
   position: relative;
+  @include responsive(md) {
+    margin: 5% auto;
+
+    width: 75vw;
+    height: 35vh;
+  }
 
   ._hide {
     width: 100%;
@@ -137,10 +142,12 @@
     background: #34363dcc;
     position: absolute;
     border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     p {
       font-family: $helveticaNowText;
       font-size: 20px;
-      position: absolute;
       top: 0px;
       bottom: 0px;
       right: 0px;

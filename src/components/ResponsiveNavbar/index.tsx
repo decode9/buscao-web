@@ -6,10 +6,13 @@ import { Location } from '../';
 import { World } from '../../../public/images/icons';
 import { scrolling } from '../../utils/common';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { setScroll } from '../../store/actions';
 
 const ResponsiveNavbar = ({ background, reference }) => {
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const [show, setShow] = useState(0);
   const [currentClass, setCurrentClass] = useState(styles._static);
@@ -24,13 +27,16 @@ const ResponsiveNavbar = ({ background, reference }) => {
     if (show == 2) setCurrentClass(styles._menuHidden);
   }, [show])
 
-  const goToAboutUs = () => {
 
-    if(router.pathname == '/') {
-      scrolling(reference)
-      showMenu()
-      return;
+  const goToAboutUs = () => {
+    if(router.pathname != '/') {
+      dispatch(setScroll(true))
+      router.push('/')
+      return
     }
+
+    scrolling(reference)
+    showMenu()
   }
 
   return (
@@ -94,7 +100,7 @@ const ResponsiveNavbar = ({ background, reference }) => {
                   <button className={styles._whiteBtn} >Compra Criptos</button>
                 </a>
 
-                <a href='https://cryptobuyer.io/es/' target='_blank' className={styles._tag}>
+                <a href='https://pay.cryptobuyer.io/accounts/signup/' target='_blank' className={styles._tag}>
                   <button className={styles._blueBtn}>Paga con Criptos</button>
                 </a>
               </div>
