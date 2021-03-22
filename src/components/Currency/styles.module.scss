@@ -19,11 +19,10 @@
     opacity: 0;
     transition: opacity 0.3s;
     top: -50px;
-    right: -30px;
+    right: 0px;
     z-index: 3;
 
     @include responsive(md) {
-      border-radius: 0;
       right: unset;
     }
   }
