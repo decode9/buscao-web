@@ -166,7 +166,7 @@
 ._buttonsParent {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  width: 90%;
   justify-content: space-between;
   margin-top: 1rem;
   margin-bottom: 3.5rem;
@@ -213,3 +213,26 @@
     display: flex;
   }
 }
+
+@include responsive(sm) {
+  ._itemsChild {
+    width: 90%;
+  }
+
+}
+
+@include responsive(miniSm) {
+  ._itemsChild {
+    width: 100%;
+  }
+
+  ._cardsParent {
+    padding: 0px 0.3rem;
+  }
+
+  ._buttonsParent {
+    width: 100%;
+    padding: 0px 0.2rem;
+  }
+}
+
