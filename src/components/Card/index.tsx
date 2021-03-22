@@ -103,8 +103,9 @@ const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true
           {
             showClock ? (
               <div className={styles._rightText}>
-                <p className={status ? styles._statusText : styles._closedText}> {status ? 'ABIERTO' : 'CERRADO '} </p>
-                <Clock color={status ? '#4A973C' : '#EC3333'} />
+                {(content) ? (<><p className={status ? styles._statusText : styles._closedText}> {status ? 'ABIERTO' : 'CERRADO '} </p>
+                  <Clock color={status ? '#4A973C' : '#EC3333'} /></>) : null}
+
               </div>
             ) : ''
           }
