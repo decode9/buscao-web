@@ -3,7 +3,7 @@ import { World, Toggle } from '../../../public/images/icons'
 import styles from './styles.module.scss'
 import Link from 'next/link';
 import { ResposiveNavbar, Location } from '../../components';
-import { setScroll } from '../../store/actions';
+import { setScroll, setLoader } from '../../store/actions';
 import { scrolling } from '../../utils/common';
 import { useSelector, useDispatch} from 'react-redux';
 import { useRouter } from 'next/router'
@@ -32,6 +32,7 @@ const Navbar = ({ background = '#1652F0', reference }: any) => {
 
   const navigateToAboutUs = () => {
     if(router.pathname != '/') {
+      dispatch(setLoader(true));
       dispatch(setScroll(true))
       router.push('/')
       return
@@ -40,6 +41,12 @@ const Navbar = ({ background = '#1652F0', reference }: any) => {
     scrolling(reference)
   }
 
+  const navigateToHome = () => {
+    if(router.pathname != '/') {
+      dispatch(setLoader(true));
+      router.push('/')
+    }
+  }
 
   return (
     <>
@@ -48,10 +55,8 @@ const Navbar = ({ background = '#1652F0', reference }: any) => {
       <div className='_main'>
       <div className={styles._container}>
         <div className={styles._leftSection} >
-          <div className={styles._logo}>
-            <Link href="/">
+          <div className={styles._logo} onClick={navigateToHome}>
               <img src='images/logos/logo.svg' />
-            </Link>
           </div>
           <div className={styles._links}>
             <Link href='/commerces'>
