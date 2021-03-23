@@ -120,6 +120,7 @@ const FeaturedSlider = ({ posts }) => {
                                     <Card
                                       content={item}
                                       phoneClass='_leftCard'
+                                      id={index}
                                     />
                                   </Currency>
                                 </div>

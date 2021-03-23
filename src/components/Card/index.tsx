@@ -46,7 +46,8 @@ const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true
     const checkSchedule = () => {
       const day = new Date().getDay()
       const actualDay = days[day]
-      const hourClose = content?.commerce?.subsidiary[0]?.schedule[actualDay]?.cierre
+      const hourClose = content?.commerce?.subsidiary[id]?.schedule[actualDay]?.cierre
+      
       const hourClosed = processHour(hourClose)
       const minutesClosed = processMinutes(hourClose)
       const currentHour = new Date().getHours()
@@ -61,11 +62,14 @@ const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true
         if (currentMinutes > minutesClosed && hourClosed <= currentHour) return false
       }
 
+      if(!hourClose) return false
+
       return checkOpen(currentHour, currentMinutes, actualDay) ? true : false
     }
 
     const checkOpen = (currentHour, currentMinutes, actualDay) => {
-      const openHour = content?.commerce?.subsidiary[0]?.schedule[actualDay]?.apertura
+      const openHour = content?.commerce?.subsidiary[id]?.schedule[actualDay]?.apertura
+      
       const hourOpen = processHour(openHour)
       const minutesOpen = processMinutes(openHour)
 
@@ -84,7 +88,7 @@ const Card: FC<CardProps> = ({ content, phoneClass, subsidiary, showClock = true
     if (showClock) setStatus(checkSchedule())
 
     setPath(window.location.pathname)
-  }, [])
+  }, [id])
 
   return (
     <div className={path != '/commerce' ? styles._commerces : styles._commerce}>
