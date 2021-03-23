@@ -23,6 +23,7 @@ const Result = ({ posts }) => {
                       <Card
                         content={post}
                         phoneClass="_leftCard"
+                        id={index}
                       />
                     </div>
                   </Currency>
