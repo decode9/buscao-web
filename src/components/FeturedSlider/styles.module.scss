@@ -36,12 +36,6 @@
 
 
 }
-
-// ._slider {
-//   display: inline-flex;
-//   justify-content: center;
-// }
-
 ._itemOne {
   width: 100%;
   align-self: center;
@@ -74,6 +68,7 @@
   padding: 1rem 2.5rem;
   cursor: pointer;
 }
+
 
 ._title {
   font-family: $helveticaNowText;
@@ -167,3 +162,77 @@
     font-size: 1.2rem;
   }
 }
+
+._buttonsParent {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+._navigationButton {
+  width: 48%;
+  background-color: $geyser;
+  border-radius: 5px;
+  padding: 0.7rem 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  display: none;
+}
+
+@include responsive(lg) {
+  ._cardsParent {
+    padding: 1rem;
+  }
+}
+
+@include responsive(md) {
+  ._cardsParent {
+    width: 100%;
+    padding: 0px 0.2rem;
+  }
+
+  ._leftArrow, ._rightArrow {
+    display: none;
+  }
+
+  ._itemsChild {
+    padding-top: 3.5rem;
+    padding-bottom: 0px;
+  }
+
+  ._itemsParent {
+    flex-direction: column;
+  }
+
+  ._navigationButton {
+    display: flex;
+  }
+}
+
+@include responsive(sm) {
+  ._itemsChild {
+    width: 90%;
+  }
+
+}
+
+@include responsive(miniSm) {
+  ._itemsChild {
+    width: 100%;
+  }
+
+  ._cardsParent {
+    padding: 0px 0.3rem;
+  }
+
+  ._buttonsParent {
+    width: 100%;
+    padding: 0px 0.2rem;
+  }
+}
+

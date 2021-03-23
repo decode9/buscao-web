@@ -2,10 +2,9 @@
 
 @mixin menu() {
   position: fixed;
-  width: 60%;
+  width: 100%;
   height: 100vh;
-  max-width: 31.25rem;
-  background-color: $white;
+  background-color: $mineShaft;
   top: 0px;
   left: -100%;
   z-index: 999;
@@ -20,12 +19,12 @@
 
 ._menu {
   @include menu;
-  animation: in ease-in 1s forwards;
+  animation: in ease-in 0.6s forwards;
 }
 
 ._menuHidden {
   @include menu;
-  animation: out ease-out 1s forwards;
+  animation: out ease-out 0.6s forwards;
 }
 
 ._static {
@@ -65,13 +64,12 @@
 
 ._locationParent {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
 
 ._worldParent {
-  margin-left: 0.5rem;
+  margin-left: 0.2rem;
 }
 
 @keyframes in {
@@ -89,5 +87,113 @@
   }
   to {
     left: -100%;
+  }
+}
+
+._toggleMobile {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+}
+
+._menuLinks {
+  width: 100%;
+  height: 85vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+._contentParent {
+  width: 100%;
+  height: 100vh;
+  padding: 1.5rem 2.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+._separator {
+  margin: 0.7rem 0px;
+  border:0px;
+  background-color: $doveGray;
+  height: 1px;
+}
+
+
+._links {
+  & p {
+    color: $white;
+    font-family: $helveticaNowText;
+    font-size: 0.8rem;
+  }
+}
+
+._contact {
+    & p {
+      color: $white;
+      font-family: $helveticaNowText;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+}
+
+@mixin btn($background, $color) {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 5px;
+  background-color: $background;
+  color: $color;
+  border: none;
+  font-family: $helveticaNowText;
+  width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+._buttons {
+  width: 100%;
+}
+
+._buttonsChild {
+  width: 20%;
+}
+
+._blueBtn {
+  @include btn($blueRibbon, $white);
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+._whiteBtn {
+  @include btn($white, $blueRibbon);
+  margin-bottom: 0.7rem;
+}
+
+._logosParent {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+._tcwLogo {
+  margin-right: 1rem;
+}
+
+._rightSide {
+  display: flex;
+}
+
+._bold {
+  font-weight: 600;
+}
+
+._tag {
+  &:hover {
+    text-decoration: none !important;
   }
 }

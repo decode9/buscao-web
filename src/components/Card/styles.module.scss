@@ -1,4 +1,4 @@
-@import '../../../public/styles/index.scss';
+@import '../../../public/styles';
 
 ._card {
   border: solid 2px $blueRibbon;
@@ -31,6 +31,10 @@
   font-family: $helveticaNowText;
   color: $tundora;
   font-size: 0.75rem;
+  display: flex;
+  p{
+    margin-right: 5px;
+  }
 }
 
 ._imageParent {
@@ -39,6 +43,11 @@
   box-sizing: border-box;
   margin-bottom: 0.5rem;
   height: 6rem;
+  img{
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+  }
 }
 
 ._statusText {
@@ -70,9 +79,15 @@
   margin-top: 1rem;
   align-items: center;
   justify-content: flex-start;
+  width: 100%;
 
   ._call {
     text-decoration: none;
+
+    @include responsive(md) {
+      font-size: 12px;
+      padding: 0.8rem 0.3rem;
+    }
   }
 }
 
@@ -153,8 +168,59 @@
   margin-left: 1rem;
   display: flex;
   align-items: center;
+  width: 60%;
+
+  svg {
+    width: 40px;
+    height: 20px;
+  }
+
+  @include responsive(md) {
+    font-size: 12px;
+
+    svg {
+      width: 25px;
+    }
+  }
 
   & p {
-    margin-right: 0.2rem
+    margin-right: 0.2rem;
+    width: 95%;
+  }
+}
+
+@include responsive(sm) {
+  ._commerce {
+    display: flex;
+    flex-wrap: wrap-reverse;
+  }
+
+  ._commerces {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  ._card {
+    width: 100%;
+  }
+
+  ._infoParentBlack {
+    flex-wrap: wrap;
+    width: 100%;
+    height: inherit;
+    margin: 0 1rem 1.5rem;
+
+    ._call{
+      width: 60%;
+      margin: auto;
+    }
+  }
+
+  ._longAddress {
+    width: 100%;
+
+    p {
+      margin-bottom: 1.5rem;
+    }
   }
 }

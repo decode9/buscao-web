@@ -1,0 +1,126 @@
+@import '../../../public/styles/index.scss';
+
+._general {
+  background-color: $mineShaft;
+  width: 100%;
+  padding: 4rem 0rem;
+  box-sizing: border-box;
+}
+
+._content {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+._socialMedia {
+  display: flex;
+}
+
+._link {
+  width: 40%;
+}
+
+._linkTwo, ._linkThree {
+  margin-left: 3rem;
+
+}
+
+._title {
+  font-family: $helveticaNowTextBold;
+  color: $white;
+  margin-bottom: 1rem;
+  font-size: 0.7rem;
+}
+
+._text {
+  font-family: $helveticaNowText;
+  color: $white;
+  font-size: 0.9rem;
+}
+
+._logos {
+  display: flex;
+}
+
+._logo {
+  margin-right: 2rem;
+}
+
+@mixin btn($background, $color, $margin, $width) {
+  padding: 0.6rem;
+  border-radius: 5px;
+  background-color: $background;
+  color: $color;
+  border: none;
+  font-family: $helveticaNowText;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: $width;
+  cursor: pointer;
+
+  @if($margin){
+    margin-bottom: $margin;
+  }
+}
+
+._buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 35%;
+}
+
+._blueBtn {
+  @include btn($blueRibbon, $white, null, 180px);
+}
+
+._whiteBtn {
+  @include btn($white, $blueRibbon, null, 180px);
+}
+
+@include responsive(xxl) {
+  ._buttons {
+    width: 40%;
+    display: flex;
+    justify-content: space-between
+  }
+}
+
+@include responsive(xl) {
+  ._buttons {
+    width: 35%;
+    display: flex;
+    justify-content: space-between
+  }
+  ._blueBtn{
+    @include btn($blueRibbon, $white, 5px, 130px);
+  }
+  ._whiteBtn{
+    @include btn($white, $blueRibbon, 5px, 130px);
+  }
+}
+
+@include responsive(lg) {
+  ._buttons {
+    display: block;
+    width: 25%;
+  }
+
+  ._blueBtn{
+    @include btn($blueRibbon, $white, 5px, 140px);
+  }
+  ._whiteBtn{
+    @include btn($white, $blueRibbon, 5px, 140px);
+  }
+}
+
+._tag {
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
+

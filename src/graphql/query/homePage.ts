@@ -12,10 +12,20 @@ const home = `
           mediaType
           sourceUrl
         }
+        backgroundResponsive {
+          id
+          mediaType
+          sourceUrl
+        }
       }
       secundaryBanner {
         content
         background {
+          id
+          mediaType
+          sourceUrl
+        }
+        backgroundResponsive {
           id
           mediaType
           sourceUrl
@@ -32,7 +42,11 @@ const home = `
           mediaType
           sourceUrl
         }
-        text
+        imageResponsive {
+          id
+          mediaType
+          sourceUrl
+        }
       }
     }
   }

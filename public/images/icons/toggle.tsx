@@ -1,7 +1,10 @@
 const Toggle = () => (
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='100%' height='100%'>
-    <path d='M0 0h24v24H0z' fill='none'/>
-    <path d='M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'/>
+  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 29.535 17.354">
+    <g id="Group_1038" data-name="Group 1038" transform="translate(-319.5 -35.5)">
+      <line id="Line_9" data-name="Line 9" x2="27.535" transform="translate(320.5 36.5)" fill="none" stroke="#fff" strokeLinecap="round" strokeWidth="2" />
+      <line id="Line_10" data-name="Line 10" x2="27.535" transform="translate(320.5 44.177)" fill="none" stroke="#fff" strokeLinecap="round" strokeWidth="2" />
+      <line id="Line_11" data-name="Line 11" x2="27.535" transform="translate(320.5 51.854)" fill="none" stroke="#fff" strokeLinecap="round" strokeWidth="2" />
+    </g>
   </svg>
 );
 
