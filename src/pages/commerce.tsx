@@ -3,7 +3,7 @@ import { Navbar, Search, Card, Currency } from '../components';
 import { NextPage } from 'next';
 import styles from '../../public/styles/Commerce.module.scss';
 import { useEffect, useState } from 'react';
-import { paginate } from '../utils';
+import { AMPM, paginate } from '../utils';
 import Pagination from '../components/Pagination';
 import { useDispatch } from 'react-redux';
 import { setLoader } from '../store/actions';
@@ -71,7 +71,7 @@ const commerce: NextPage = () => {
           <div className={(company) ? styles._mapContainer : styles._hideMap}>
             {(company) ? '' : <div className={styles._hide}><p>No Disponible</p></div>}
             <iframe
-              src={ (subsidiary) ? `https://maps.google.com/maps?q=${subsidiary.map?.latitude},${subsidiary.map?.longitude}&z=15&output=embed` : ''}>
+              src={(subsidiary) ? `https://maps.google.com/maps?q=${subsidiary.map?.latitude},${subsidiary.map?.longitude}&z=15&output=embed` : ''}>
             </iframe>
           </div>
         </section>
@@ -91,7 +91,7 @@ const commerce: NextPage = () => {
                       <p>{card.phoneNumber}</p>
                       {
                         card.schedule[day] ?
-                          card.schedule[day].apertura ? <p>{card.schedule[day].apertura} / {card.schedule[day].cierre}</p> : <p>No Disponible</p>
+                          card.schedule[day].apertura ? <p>{AMPM(card.schedule[day].apertura)} / {AMPM(card.schedule[day].cierre)}</p> : <p>No Disponible</p>
                           : <p> - </p>
                       }
                     </button>
