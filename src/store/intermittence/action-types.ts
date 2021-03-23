@@ -1,0 +1,1 @@
+export const ABOUT_US_SCROLL = 'ABOUT_US_SCROLL';

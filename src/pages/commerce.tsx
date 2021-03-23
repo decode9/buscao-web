@@ -3,7 +3,7 @@ import { Navbar, Search, Card, Currency } from '../components';
 import { NextPage } from 'next';
 import styles from '../../public/styles/Commerce.module.scss';
 import { useEffect, useState } from 'react';
-import { paginate } from '../utils';
+import { AMPM, paginate } from '../utils';
 import Pagination from '../components/Pagination';
 import { useDispatch } from 'react-redux';
 import { setLoader } from '../store/actions';
@@ -11,7 +11,7 @@ import { setLoader } from '../store/actions';
 const findDay = () => {
   const options = { weekday: 'long' };
   let date = new Date()
-  let day_week = date.toLocaleDateString(undefined, options)
+  let day_week = date.toLocaleDateString('en-US', options)
   let day_week_arr = day_week.split(',');
   let day = day_week_arr[0].toLowerCase();
   return day;
@@ -28,6 +28,7 @@ const commerce: NextPage = () => {
 
   const [company, setCompany] = useState<any>(() => filterPosts.find(element => element['id'] == selectedCommerce.id));
   const [subsidiary, setSubsidiary] = useState<any>();
+  const [index, setIndex] = useState(0);
   const [focus, setFocus] = useState(1);
   const [page, setPage] = useState(1)
 
@@ -43,6 +44,7 @@ const commerce: NextPage = () => {
   const changeCompany = (node, element) => {
     setSubsidiary(node);
     setFocus(element);
+    setIndex(element);
     var x = document.getElementById(element)
     var y = document.getElementById(focus.toString())
     x?.setAttribute('style', 'color: white; background-color: #1652F0;')
@@ -60,18 +62,19 @@ const commerce: NextPage = () => {
                 content={company}
                 phoneClass='_infoParentBlack'
                 subsidiary={subsidiary ? subsidiary : ''}
-                showClock={false}
+                showClock={true}
                 showAddress={false}
+                id={index}
               />
             </div>
-            <section style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+            <section>
               <Currency key={company ? company.id : []} currenciesData={company ? { currencies: company.commerce.paymentmethods } : []} />
             </section>
           </div>
-          <div className={(company) ? '' : styles._hideMap}>
+          <div className={(company) ? styles._mapContainer : styles._hideMap}>
             {(company) ? '' : <div className={styles._hide}><p>No Disponible</p></div>}
             <iframe
-              src='https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d12329023.712065306!2d-91.10433262499994!3d41.0249156380248!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sve!4v1613662529659!5m2!1ses!2sve'>
+              src={(subsidiary) ? `https://maps.google.com/maps?q=${subsidiary.map?.latitude},${subsidiary.map?.longitude}&z=15&output=embed` : ''}>
             </iframe>
           </div>
         </section>
@@ -91,8 +94,8 @@ const commerce: NextPage = () => {
                       <p>{card.phoneNumber}</p>
                       {
                         card.schedule[day] ?
-                          <p>{card.schedule[day].apertura} / {card.schedule[day].cierre}</p> :
-                          <p> - </p>
+                          card.schedule[day].apertura ? <p>{AMPM(card.schedule[day].apertura)} / {AMPM(card.schedule[day].cierre)}</p> : <p>No Disponible</p>
+                          : <p> - </p>
                       }
                     </button>
                   )

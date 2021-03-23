@@ -15,36 +15,12 @@
   align-items: center;
 }
 
-._socialMedia {
-  display: flex;
-}
-
-._link {
-  width: 40%;
-}
-
-._linkTwo, ._linkThree {
-  margin-left: 5rem;
-}
-
-._title {
-  font-family: $helveticaNowTextBold;
-  color: $white;
-  margin-bottom: 1.6rem;
-  font-size: 0.9rem;
-}
-
-._text {
-  font-family: $helveticaNowText;
-  color: $white;
-  font-size: 0.9rem;
-}
-
 ._logos {
   display: flex;
 }
 
-
 ._logo {
   margin-right: 2rem;
 }
+
+
