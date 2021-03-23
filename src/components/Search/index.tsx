@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux'
 import { filterPosts, setFilter } from '../../store/actions';
@@ -8,8 +8,12 @@ import styles from './styles.module.scss'
 const Search = () => {
   const dispatch = useDispatch()
   const router = useRouter()
+  const { filter, countryPosts } = useSelector(state => state.post);
 
-  const { filter } = useSelector(state => state.post);
+  useEffect(() => {
+    return () => { if (router.route == '/commerces') changeState('') }
+  }, [countryPosts])
+
 
   const [checkedOne, setCheckedOne]: any = useState(filter.checkedOne)
   const [checkedTwo, setCheckedTwo]: any = useState(filter.checkedTwo)
@@ -17,13 +21,6 @@ const Search = () => {
   const { categories, currentStates } = useSelector(state => state.resource);
 
   const [select, setSelect]: any = useState({ state: filter.state, category: filter.category, title: filter.title, checkedOne: checkedOne, checkedTwo: checkedTwo })
-
-  const changeState = (value) => {
-    dispatch(filterPosts(value, 'state'))
-    setSelect({ ...select, ...{ state: value, category: '', title: '' } })
-    dispatch(setFilter({ ...select, ...{ state: value, category: '', title: '', checkedOne: checkedOne, checkedTwo: checkedTwo } }))
-    if (value && router.route == '/') redirectToResults()
-  }
 
   const checkStateOne = () => {
     changeState('')
@@ -34,6 +31,22 @@ const Search = () => {
     setCheckedTwo(!checkedTwo)
   }
 
+  const changeState = (value) => {
+    dispatch(filterPosts(value, 'state'))
+    setSelect({ ...select, ...{ state: value, category: '', title: '' } })
+    dispatch(setFilter({ ...select, ...{ state: value, category: '', title: '', checkedOne: checkedOne, checkedTwo: checkedTwo } }))
+    if (value && router.route == '/') redirectToResults()
+  }
+
+
+  const changeTitle = () => {
+    const title = select.title
+    dispatch(filterPosts(title, 'title'))
+    dispatch(setFilter(select))
+
+    if (title) redirectToResults()
+  }
+
   const changeCategory = (value) => {
     dispatch(filterPosts(value, 'categories'))
     setSelect({ ...select, ...{ category: value, title: '', checkedOne: checkedOne, checkedTwo: checkedTwo } })
@@ -41,13 +54,7 @@ const Search = () => {
     if (value) redirectToResults()
   }
 
-  const changeTitle = (event) => {
-    const title = select.title
-    dispatch(filterPosts(title, 'title'))
-    dispatch(setFilter(select))
 
-    if (title) redirectToResults()
-  }
 
   const redirectToResults = () => {
     const pathname = router.pathname
@@ -62,9 +69,9 @@ const Search = () => {
             <Checkbox color={checkedOne ? '#1652F0' : '#93959A'} />
           </div>
           <div className={styles._select}>
-            <label style={{ display: 'flex' }}>
-              <label style={{ color: checkedOne ? '#1652F0' : '#93959A' }} htmlFor='state'>UBICACIÓN</label>
-              <div className={styles._dropdown}> <DropDown color={checkedOne ? '#1652F0' : '#93959A'} /> </div>
+            <label style={{ display: 'flex' }} htmlFor="state" className={checkedOne ? (router.pathname === '/commerce') ? styles._activeCommerce : styles._active : styles._inactive} >
+              <label htmlFor='state'>UBICACIÓN</label>
+              <div className={styles._dropdown}> <DropDown /> </div>
             </label>
             <select disabled={!checkedOne} name='state' value={select.state} onChange={event => changeState(event.target.value)}>
               <option value=''>Todos</option>
@@ -78,9 +85,9 @@ const Search = () => {
           <Checkbox color={checkedTwo ? '#1652F0' : '#93959A'} />
         </div>
         <div className={styles._select}>
-          <label style={{ display: 'flex' }}>
-            <label style={{ color: checkedTwo ? '#1652F0' : '#93959A' }} htmlFor='category'>CATEGORIAS</label>
-            <div className={styles._dropdown}> <DropDown color={checkedTwo ? '#1652F0' : '#93959A'} /> </div>
+          <label style={{ display: 'flex' }} htmlFor='category' className={checkedTwo ? (router.pathname === '/commerce') ? styles._activeCommerce : styles._active : styles._inactive}>
+            <label htmlFor='category'>CATEGORIAS</label>
+            <div className={styles._dropdown}> <DropDown /> </div>
           </label>
           <select disabled={!checkedTwo} name='category' value={select.category} onChange={event => changeCategory(event.target.value)} >
             <option value=''>Todos</option>
