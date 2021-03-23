@@ -28,6 +28,7 @@ const commerce: NextPage = () => {
 
   const [company, setCompany] = useState<any>(() => filterPosts.find(element => element['id'] == selectedCommerce.id));
   const [subsidiary, setSubsidiary] = useState<any>();
+  const [index, setIndex] = useState(0);
   const [focus, setFocus] = useState(1);
   const [page, setPage] = useState(1)
 
@@ -43,6 +44,7 @@ const commerce: NextPage = () => {
   const changeCompany = (node, element) => {
     setSubsidiary(node);
     setFocus(element);
+    setIndex(element);
     var x = document.getElementById(element)
     var y = document.getElementById(focus.toString())
     x?.setAttribute('style', 'color: white; background-color: #1652F0;')
@@ -62,6 +64,7 @@ const commerce: NextPage = () => {
                 subsidiary={subsidiary ? subsidiary : ''}
                 showClock={true}
                 showAddress={false}
+                id={index}
               />
             </div>
             <section>
