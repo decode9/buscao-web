@@ -7,7 +7,7 @@ import { World } from '../../../public/images/icons';
 import { scrolling } from '../../utils/common';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import { setScroll } from '../../store/actions';
+import { setScroll, setLoader } from '../../store/actions';
 
 const ResponsiveNavbar = ({ background, reference }) => {
 
@@ -30,6 +30,7 @@ const ResponsiveNavbar = ({ background, reference }) => {
 
   const goToAboutUs = () => {
     if(router.pathname != '/') {
+      dispatch(setLoader(true));
       dispatch(setScroll(true))
       router.push('/')
       return
@@ -39,14 +40,19 @@ const ResponsiveNavbar = ({ background, reference }) => {
     showMenu()
   }
 
+  const navigateToHome = () => {
+    if(router.pathname != '/') {
+      dispatch(setLoader(true));
+      router.push('/')
+    }
+  }
+
   return (
     <>
       <div className='_mainResponsive'>
         <div className={styles._child}>
-          <div>
-            <Link href='/'>
+          <div onClick={navigateToHome}>
               <img src='images/logos/logo-responsive.svg' />
-            </Link>
           </div>
 
           <div className={styles._rightSide}>
