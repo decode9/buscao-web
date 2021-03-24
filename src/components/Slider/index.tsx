@@ -40,12 +40,11 @@ const Slider = ({ page }) => {
   useEffect(() => {
     const container = parent.current;
     container.addEventListener('wheel', handlerTrackpad, { passive: false });
-    return () => container.removeEventListener('wheel', () => { });
+    return () => container.removeEventListener('wheel', handlerTrackpad);
   }, []);
 
   const handlerTrackpad = (event: any) => {
-    const isTouchPad = event.wheelDeltaY ? event.wheelDeltaY === -3 * event.deltaY : event.deltaMode === 0;
-    if (isTouchPad) event.preventDefault();
+    if(event.wheelDeltaX != 0) event.preventDefault();
   }
 
   const sliding = (value) => {
