@@ -73,7 +73,7 @@ const Search = () => {
               <label htmlFor='state'>UBICACIÓN</label>
               <div className={styles._dropdown}> <DropDown /> </div>
             </label>
-            <select disabled={!checkedOne} name='state' value={select.state} onChange={event => changeState(event.target.value)}>
+            <select disabled={!checkedOne} name='state' id='state' value={select.state} onChange={event => changeState(event.target.value)}>
               <option value=''>Todos</option>
               {currentStates.map((state, index) => (<option value={state.slug} key={index}>{state.name}</option>))}
             </select>
