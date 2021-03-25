@@ -69,11 +69,11 @@ const Search = () => {
             <Checkbox color={checkedOne ? '#1652F0' : '#93959A'} />
           </div>
           <div className={styles._select}>
-            <label style={{ display: 'flex' }} htmlFor="state" className={checkedOne ? (router.pathname === '/commerce') ? styles._activeCommerce : styles._active : styles._inactive} >
+            <label style={{ display: 'flex' }} htmlFor='state' className={checkedOne ? (router.pathname === '/commerce') ? styles._activeCommerce : styles._active : styles._inactive} >
               <label htmlFor='state'>UBICACIÓN</label>
               <div className={styles._dropdown}> <DropDown /> </div>
             </label>
-            <select disabled={!checkedOne} name='state' value={select.state} onChange={event => changeState(event.target.value)}>
+            <select disabled={!checkedOne} name='state' id='state' value={select.state} onChange={event => changeState(event.target.value)}>
               <option value=''>Todos</option>
               {currentStates.map((state, index) => (<option value={state.slug} key={index}>{state.name}</option>))}
             </select>
