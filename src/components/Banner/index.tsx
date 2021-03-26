@@ -21,7 +21,7 @@ const Banner = ({ section }) => {
       </div>
 
       <style jsx type="scss">{`
-      
+
       ._container {
         background-image: url(${section?.background?.sourceUrl});
         background-size: 100% 100%;
