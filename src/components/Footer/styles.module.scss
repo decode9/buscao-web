@@ -8,7 +8,7 @@
 }
 
 ._content {
-  width: 90%;
+  width: 95%;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -75,11 +75,11 @@
 }
 
 ._blueBtn {
-  @include btn($blueRibbon, $white, null, 180px);
+  @include btn($blueRibbon, $white, null, 190px);
 }
 
 ._whiteBtn {
-  @include btn($white, $blueRibbon, null, 180px);
+  @include btn($white, $blueRibbon, null, 190px);
 }
 
 @include responsive(xxl) {
@@ -97,10 +97,10 @@
     justify-content: space-between
   }
   ._blueBtn{
-    @include btn($blueRibbon, $white, 5px, 180px);
+    @include btn($blueRibbon, $white, 5px, 190px);
   }
   ._whiteBtn{
-    @include btn($white, $blueRibbon, 5px, 180px);
+    @include btn($white, $blueRibbon, 5px, 190px);
   }
 }
 
@@ -111,10 +111,10 @@
   }
 
   ._blueBtn{
-    @include btn($blueRibbon, $white, 5px, 180px);
+    @include btn($blueRibbon, $white, 5px, 190px);
   }
   ._whiteBtn{
-    @include btn($white, $blueRibbon, 5px, 180px);
+    @include btn($white, $blueRibbon, 5px, 190px);
   }
 }
 
