@@ -107,7 +107,7 @@ const ResponsiveNavbar = ({ background, reference }) => {
                 </a>
 
                 <a href='https://pay.cryptobuyer.io/accounts/signup/' target='_blank' className={styles._tag}>
-                  <button className={styles._blueBtn}>Paga con Criptos</button>
+                  <button className={styles._blueBtn}>Solicita Tu Punto de Venta</button>
                 </a>
               </div>
 
