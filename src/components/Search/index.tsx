@@ -69,7 +69,7 @@ const Search = () => {
             <Checkbox color={checkedOne ? '#1652F0' : '#93959A'} />
           </div>
           <div className={styles._select}>
-            <label style={{ display: 'flex' }} htmlFor='state' className={checkedOne ? (router.pathname === '/commerce') ? styles._activeCommerce : styles._active : styles._inactive} >
+            <label style={{ display: 'flex' }} onClick={() => { console.log('hola'); document.getElementById('state').click() }} htmlFor='state' className={checkedOne ? (router.pathname === '/commerce') ? styles._activeCommerce : styles._active : styles._inactive} >
               <label htmlFor='state'>UBICACIÓN</label>
               <div className={styles._dropdown}> <DropDown /> </div>
             </label>
