@@ -8,7 +8,7 @@ const Welcome = ({ section, title = '' }) => {
 
   const [responsive, setResponsive] = useState('');
   const [path, setPath] = useState('');
-  
+
   useEffect(() => {
     if(window.innerWidth <= 576) setResponsive('576');
     if(window.innerWidth >576 && window.innerWidth <= 768) setResponsive('768');
@@ -24,14 +24,14 @@ const Welcome = ({ section, title = '' }) => {
     if(window.matchMedia('(max-width: 768px) and (min-width: 577px)').matches) return setResponsive('768');
     if(window.matchMedia('(min-width: 769px)').matches) return setResponsive('769');
   };
-  
+
   return (
     <>
       <div className={"_main"}>
         <div className={[styles._container, 'container'].join(" ")}>
           <div className={styles._centerContainer}>
             <div className={styles._titleContainer}>
-              <p className={styles._title}>{section?.title}</p>
+                  <p className={styles._title}>{section?.title}</p>
             </div>
             <div className={styles._descriptionContainer}>
               <p className={styles._description}>{section?.subtitle}</p>
@@ -66,7 +66,7 @@ const Welcome = ({ section, title = '' }) => {
       </div>
       <style jsx>{`
         ._main {
-          background-image: ${(path == '/commerces' && responsive <= '576') ? ''  : 
+          background-image: ${(path == '/commerces' && responsive <= '576') ? ''  :
                               (path == '/commerces' && responsive > '576') ? `url(${sourceUrl})` :
                               `url(${responsive > '576' ? sourceUrl : sourceUrlResponsive})`};
           background-color: ${path == '/commerces' && responsive <= '576' ? '#1652F0' : ''};
@@ -83,7 +83,7 @@ const Welcome = ({ section, title = '' }) => {
 
         .container {
           height: ${(path == '/commerces' && responsive <= '576') ? '25vh'  : ''};
-                  
+
       `}</style>
     </>
   )
