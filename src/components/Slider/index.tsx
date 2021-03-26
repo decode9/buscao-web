@@ -14,6 +14,7 @@ const Slider = ({ page }) => {
   const [up, setUp] = useState(true);
   const [responsive, setResponsive] = useState(false);
   const [sliderWidth, setSliderWidth] = useState('0%')
+  const [automatic, setAutomatic] = useState(false);
 
   const parent = useRef(null);
 
@@ -22,7 +23,28 @@ const Slider = ({ page }) => {
     window.addEventListener('resize', checkWidth);
     calculateWidth()
 
-    return () => window.removeEventListener('resize', checkWidth);
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 1400) return setAutomatic(true);
+      setAutomatic(false)
+    });
+
+    return () => {
+      window.removeEventListener('resize', checkWidth);
+      window.removeEventListener('scroll', () => { })
+    }
+  }, []);
+
+  useEffect(() => {
+    if (automatic) sliding();
+    if (currentImage == 2) setUp(false);
+    if (currentImage == 1 && !up) setUp(true);
+  }, [currentImage, automatic]);
+
+  useEffect(() => {
+    const container = parent.current;
+    container.addEventListener('wheel', handlerTrackpad, { passive: false });
+
+    return () => container.removeEventListener('wheel', handlerTrackpad);
   }, []);
 
   const checkWidth = () => {
@@ -31,23 +53,11 @@ const Slider = ({ page }) => {
     setResponsive(false);
   };
 
-  useEffect(() => {
-    sliding(currentImage);
-    if (currentImage == 2) setUp(false);
-    if (currentImage == 1 && !up) setUp(true);
-  }, [currentImage]);
-
-  useEffect(() => {
-    const container = parent.current;
-    container.addEventListener('wheel', handlerTrackpad, { passive: false });
-    return () => container.removeEventListener('wheel', handlerTrackpad);
-  }, []);
-
   const handlerTrackpad = (event: any) => {
-    if(event.wheelDeltaX != 0) event.preventDefault();
+    if (event.wheelDeltaX != 0) event.preventDefault();
   }
 
-  const sliding = (value) => {
+  const sliding = () => {
     const getElement = document.getElementById(page?.slideshow[currentImage].image.id);
     let offset = getElement.getBoundingClientRect()?.left;
     let offsetString = offset?.toString();
@@ -57,11 +67,24 @@ const Slider = ({ page }) => {
       offset = Number(newOffset);
     }
 
-    if (value == 2) offset = offset += offset;
-    if (value == 1) offset = offset;
+    if (currentImage == 2) offset = offset += offset;
+    if (currentImage == 1) offset = offset;
+
+    let maximum;
+    imagesLength <= 3 ? maximum = imagesLength - 1 : maximum = 2;
+
+    setTimeout(() => {
+      if (currentImage >= 0 && currentImage < maximum && up) {
+        return setCurrentImage(currentImage + 1);
+      }
+      if (currentImage <= 2) {
+        if (currentImage >= 1) setCurrentImage(currentImage - 1);
+        return;
+      }
+    }, 5000);
 
     parent.current.scrollTo({
-      left: value == 0 ? 0 : offset,
+      left: currentImage == 0 ? 0 : offset,
       behavior: 'smooth'
     });
   }
@@ -106,7 +129,7 @@ const Slider = ({ page }) => {
           <div className={styles._steps}>
             {
               steps.slice(0, imagesLength <= 3 ? imagesLength : 3).map((res, index) => {
-                return <div className={checkStep(res.number)} onClick={() => slide(res.number)} key={index}></div>
+                return <div className={checkStep(res.number)} key={index}></div>
               })
             }
           </div>
