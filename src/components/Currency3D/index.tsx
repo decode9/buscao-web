@@ -60,7 +60,7 @@ const Currency3D = () => {
             coins.map((res, index) => {
               return (
                 <div key={index} className={styles[res.class]}>
-                  <img id={res.id} className={res.animation} onMouseOver={() => res.enter(index)} onMouseOut={() => res.out()} src={res.source} width={'45%'} ></img>
+                  <img id={res.id} className={res.animation} onMouseOver={() => res.enter(index)} onMouseOut={() => res.out()} src={res.source} width={'55%'} ></img>
                 </div>
               )
             })
