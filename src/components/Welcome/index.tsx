@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 
 const Welcome = ({ section, title = '' }) => {
   const sourceUrl = section?.background?.sourceUrl
-  const sourceUrlResponsive = 'images/backgrounds/buscao-responsive.png'
+  const sourceUrlResponsive = section?.backgroundResponsive?.sourceUrl
 
   const [responsive, setResponsive] = useState('');
   const [path, setPath] = useState('');

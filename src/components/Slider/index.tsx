@@ -117,7 +117,7 @@ const Slider = ({ page }) => {
               page?.slideshow.slice(0, imagesLength <= 3 ? imagesLength : 3).map((item, index) => {
                 return (
                   <div className={styles._container} key={index} id={item?.image?.id} >
-                    <div style={{ backgroundImage: `url(${!responsive ? item.image.sourceUrl : item.imageResponsive.sourceUrl})` }} className={styles._divImage} />
+                    <div style={{ backgroundImage: `url(${!responsive ? item.image.sourceUrl : 'images/backgrounds/slider.png'})` }} className={styles._divImage} />
                   </div>
                 )
               })
