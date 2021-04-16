@@ -35,7 +35,8 @@ const Banner = ({ section }) => {
         ._container {
           background-image: url(${section?.backgroundResponsive?.sourceUrl});
           width: 100%;
-          height: 127vw;
+          background-size: cover;
+          height: 100vh;
         }
       }
     `}</style>
