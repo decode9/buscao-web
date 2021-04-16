@@ -70,7 +70,7 @@ const Welcome = ({ section, title = '' }) => {
                               (path == '/commerces' && responsive > '576') ? `url(${sourceUrl})` :
                               `url(${responsive > '576' ? sourceUrl : sourceUrlResponsive})`};
           background-color: ${path == '/commerces' && responsive <= '576' ? '#1652F0' : ''};
-          background-size: ${responsive <= '576' ? '100% 100%' : 'cover'};
+          background-size: ${responsive <= '576' ? 'cover' : 'cover'};
           background-repeat: no-repeat;
           background-position: center;
           height: ${(path == '/commerces' && responsive <= '576') ? '30vh' : '80vh'};
