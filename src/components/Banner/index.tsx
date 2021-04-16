@@ -33,7 +33,7 @@ const Banner = ({ section }) => {
 
       @media (max-width: 992px) {
         ._container {
-          background-image: url('images/backgrounds/second-banner.png');
+          background-image: url(${section?.backgroundResponsive?.sourceUrl});
           width: 100%;
           background-size: cover;
           height: 100vh;
